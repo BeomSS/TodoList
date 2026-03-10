@@ -10,14 +10,21 @@ struct TodayTodoWidgetView: View {
 
     /// 위젯 본문입니다.
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: containerSpacing) {
             TodayTodoWidgetHeaderView()
 
             if entry.items.isEmpty {
                 TodayTodoWidgetEmptyStateView()
             } else {
-                ForEach(visibleItems) { item in
-                    TodayTodoWidgetItemRowView(item: item)
+                VStack(alignment: .leading, spacing: rowSpacing) {
+                    ForEach(visibleItems) { item in
+                        TodayTodoWidgetItemRowView(
+                            item: item,
+                            titleFont: titleFont,
+                            titleLineLimit: titleLineLimit,
+                            subtitleFont: subtitleFont
+                        )
+                    }
                 }
 
                 if hiddenItemCount > 0 {
@@ -48,6 +55,58 @@ struct TodayTodoWidgetView: View {
             return 1
         default:
             return 2
+        }
+    }
+
+    /// 위젯 전체 수직 간격입니다.
+    private var containerSpacing: CGFloat {
+        switch widgetFamily {
+        case .systemSmall:
+            return 10
+        default:
+            return 8
+        }
+    }
+
+    /// 항목 행 사이 간격입니다.
+    private var rowSpacing: CGFloat {
+        switch widgetFamily {
+        case .systemSmall:
+            return 8
+        default:
+            return 6
+        }
+    }
+
+    /// 제목 폰트입니다. 중간 위젯에서는 더 작은 폰트를 사용해 더 많은 글자를 노출합니다.
+    private var titleFont: Font {
+        switch widgetFamily {
+        case .systemSmall:
+            return .subheadline.weight(.semibold)
+        default:
+            return .footnote.weight(.semibold)
+        }
+    }
+
+    /// 제목 최대 줄 수입니다.
+    private var titleLineLimit: Int {
+        switch widgetFamily {
+        case .systemSmall:
+            return 2
+        case .systemMedium:
+            return 1
+        default:
+            return 2
+        }
+    }
+
+    /// 부제목(마감 시각) 폰트입니다.
+    private var subtitleFont: Font {
+        switch widgetFamily {
+        case .systemSmall:
+            return .caption2.weight(.medium)
+        default:
+            return .caption2
         }
     }
 }
