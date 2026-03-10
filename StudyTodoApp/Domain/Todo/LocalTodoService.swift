@@ -1,63 +1,50 @@
 import Foundation
 
-// UseCase 계층이 의존하는 TODO 서비스 계약입니다.
-// ViewModel은 서비스 구현체가 아니라 UseCase를 통해서만 기능을 사용합니다.
-public protocol TodoServiceType: AnyObject {
-    var items: [TodoItemViewData] { get }
-    var undoToast: UndoToastState? { get }
-
-    func addTodo(title: String, endDate: Date?)
-    func updateTodo(id: Int, title: String, endDate: Date?)
-    func toggleCompletion(id: Int)
-    func deleteTodo(id: Int)
-    func moveTodos(fromOffsets: IndexSet, toOffset: Int)
-    func reorderTodos(orderedIDs: [Int])
-    func undoLastDeletion()
-    func clearUndoToast()
-    func clearAllTodos()
-}
-
-// 할 일 제목 정규화(트림/중복 공백 제거 등) 규칙입니다.
-public struct TodoTitleNormalizer {
-    public init() {}
-
-    // 사용자 입력 문자열을 저장하기 적합한 형태로 정리합니다.
-    public func normalize(_ raw: String) -> String {
-        // 줄바꿈/연속 공백을 단일 공백으로 압축합니다.
-        let collapsed = raw
-            .components(separatedBy: .whitespacesAndNewlines)
-            .filter { $0.isEmpty == false }
-            .joined(separator: " ")
-
-        return collapsed.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-}
-
-// 로컬 TODO 비즈니스 로직을 담당하는 서비스입니다.
+/// 로컬 TODO 비즈니스 로직을 담당하는 서비스입니다.
 public final class LocalTodoService: TodoServiceType {
+    // MARK: - Dependencies
+
     // 영속 저장소(CoreData 등)입니다.
     private var store: TodoStore
     // 현재 시각 주입 함수입니다. 테스트에서 고정 시각을 넣기 쉽습니다.
     private let nowProvider: () -> Date
     // 제목 정규화 규칙입니다.
     private let titleNormalizer: TodoTitleNormalizer
+    // 마감 알림 스케줄링 구현체입니다.
+    private let reminderScheduler: TodoReminderScheduling
+    // 도메인 이벤트 발행 구현체입니다.
+    private let eventPublisher: TodoEventPublishing
 
-    // 현재 TODO 목록입니다.
+    /// 현재 TODO 목록입니다.
     public private(set) var items: [TodoItemViewData] = []
-    // 로컬 신규 TODO ID 생성기입니다.
+    /// 로컬 신규 TODO ID 생성기입니다.
     public private(set) var nextLocalID: Int = -1
-    // 마지막 삭제 Undo 토스트 상태입니다.
+    /// 마지막 삭제 Undo 토스트 상태입니다.
     public private(set) var undoToast: UndoToastState?
 
+    // MARK: - Init
+
+    /// 로컬 TODO 서비스를 생성합니다.
+    /// - Parameters:
+    ///   - store: 영속 저장소 구현체입니다.
+    ///   - nowProvider: 현재 시각 공급자입니다.
+    ///   - titleNormalizer: 제목 정규화 규칙입니다.
+    ///   - reminderScheduler: 알림 스케줄러 구현체입니다.
+    ///   - eventPublisher: 도메인 이벤트 발행 구현체입니다.
+    ///   - initialItems: 초기 부트스트랩 항목입니다.
     public init(
         store: TodoStore,
         nowProvider: @escaping () -> Date = Date.init,
         titleNormalizer: TodoTitleNormalizer = TodoTitleNormalizer(),
+        reminderScheduler: TodoReminderScheduling = NoOpTodoReminderScheduler(),
+        eventPublisher: TodoEventPublishing = NoOpTodoEventPublisher(),
         initialItems: [TodoItemViewData] = []
     ) {
         self.store = store
         self.nowProvider = nowProvider
         self.titleNormalizer = titleNormalizer
+        self.reminderScheduler = reminderScheduler
+        self.eventPublisher = eventPublisher
 
         // 저장된 스냅샷이 있으면 우선 복원합니다.
         if let saved = store.loadState() {
@@ -71,17 +58,28 @@ public final class LocalTodoService: TodoServiceType {
 
         // 앱 시작 시점에 저장소와 메모리 상태를 동기화합니다.
         persist()
+        // 저장된 상태를 기준으로 알림도 한 번 동기화합니다.
+        syncAllReminders()
     }
 
-    public func addTodo(title: String, endDate: Date?) {
+    // MARK: - CRUD
+
+    /// TODO를 추가하고 필요 시 알림을 등록합니다.
+    /// - Parameters:
+    ///   - title: 할 일 제목입니다.
+    ///   - endDate: 마감 시각입니다.
+    ///   - reminderOffsets: 알림 오프셋(초) 목록입니다.
+    public func addTodo(title: String, endDate: Date?, reminderOffsets: [Int]) {
         // 입력 정규화 후 빈 문자열이면 무시합니다.
         let normalizedTitle = titleNormalizer.normalize(title)
         guard normalizedTitle.isEmpty == false else { return }
+        let normalizedOffsets = normalizeReminderOffsets(reminderOffsets)
 
         let newItem = TodoItemViewData(
             id: nextLocalID,
             title: normalizedTitle,
             endDate: endDate,
+            reminderOffsets: normalizedOffsets,
             isCompleted: false,
             completedAt: nil
         )
@@ -90,25 +88,40 @@ public final class LocalTodoService: TodoServiceType {
         nextLocalID -= 1
         items.insert(newItem, at: 0)
         persist()
+        // 신규 항목 알림을 등록합니다.
+        reminderScheduler.replaceReminders(for: newItem)
+        emitEvent(kind: .added, todoID: newItem.id)
     }
 
-    // 기존 TODO 제목/마감일을 수정합니다.
-    public func updateTodo(id: Int, title: String, endDate: Date?) {
+    /// TODO 제목/마감일/알림을 수정합니다.
+    /// - Parameters:
+    ///   - id: 수정 대상 TODO ID입니다.
+    ///   - title: 변경할 제목입니다.
+    ///   - endDate: 변경할 마감 시각입니다.
+    ///   - reminderOffsets: 변경할 알림 오프셋(초) 목록입니다.
+    public func updateTodo(id: Int, title: String, endDate: Date?, reminderOffsets: [Int]) {
         let normalizedTitle = titleNormalizer.normalize(title)
         guard normalizedTitle.isEmpty == false else { return }
         guard let index = items.firstIndex(where: { $0.id == id }) else { return }
+        let normalizedOffsets = normalizeReminderOffsets(reminderOffsets)
 
         let current = items[index]
         items[index] = TodoItemViewData(
             id: current.id,
             title: normalizedTitle,
             endDate: endDate,
+            reminderOffsets: normalizedOffsets,
             isCompleted: current.isCompleted,
             completedAt: current.completedAt
         )
         persist()
+        // 수정된 정보 기준으로 알림을 재등록합니다.
+        reminderScheduler.replaceReminders(for: items[index])
+        emitEvent(kind: .updated, todoID: current.id)
     }
 
+    /// TODO 완료 상태를 토글하고 알림 상태를 갱신합니다.
+    /// - Parameter id: 토글 대상 TODO ID입니다.
     public func toggleCompletion(id: Int) {
         guard let index = items.firstIndex(where: { $0.id == id }) else { return }
 
@@ -121,13 +134,19 @@ public final class LocalTodoService: TodoServiceType {
             id: current.id,
             title: current.title,
             endDate: current.endDate,
+            reminderOffsets: current.reminderOffsets,
             isCompleted: newCompleted,
             completedAt: completedAt
         )
 
         persist()
+        // 완료되면 알림이 제거되고, 완료 해제되면 조건에 맞는 알림이 다시 등록됩니다.
+        reminderScheduler.replaceReminders(for: items[index])
+        emitEvent(kind: .toggledCompletion, todoID: current.id)
     }
 
+    /// TODO를 삭제하고 Undo 상태 및 알림 상태를 갱신합니다.
+    /// - Parameter id: 삭제 대상 TODO ID입니다.
     public func deleteTodo(id: Int) {
         guard let index = items.firstIndex(where: { $0.id == id }) else { return }
 
@@ -140,9 +159,17 @@ public final class LocalTodoService: TodoServiceType {
 
         // 삭제는 즉시 저장하고, Undo 가능 상태를 함께 유지합니다.
         persist()
+        // 삭제된 항목의 예약 알림을 즉시 해제합니다.
+        reminderScheduler.removeReminders(forTodoID: removed.id)
+        emitEvent(kind: .deleted, todoID: removed.id)
     }
 
-    // 드래그 정렬 결과를 반영하고 저장합니다.
+    // MARK: - Ordering
+
+    /// 드래그 정렬 결과를 반영해 저장합니다.
+    /// - Parameters:
+    ///   - fromOffsets: 원본 인덱스 집합입니다.
+    ///   - toOffset: 이동 목적지 인덱스입니다.
     public func moveTodos(fromOffsets: IndexSet, toOffset: Int) {
         guard fromOffsets.isEmpty == false else { return }
 
@@ -164,10 +191,11 @@ public final class LocalTodoService: TodoServiceType {
 
         items.insert(contentsOf: movingItems, at: adjustedDestination)
         persist()
+        emitEvent(kind: .reordered, todoID: nil)
     }
 
-    // 전달받은 ID 순서대로 전체 목록을 재배열합니다.
-    // 메인(진행중) 목록만 이동한 뒤 완료 목록을 뒤에 유지하고 싶을 때 사용합니다.
+    /// 전달받은 ID 순서대로 전체 목록을 재배열합니다.
+    /// - Parameter orderedIDs: 최종 순서대로 정렬된 TODO ID 목록입니다.
     public func reorderTodos(orderedIDs: [Int]) {
         guard orderedIDs.isEmpty == false else { return }
 
@@ -190,8 +218,12 @@ public final class LocalTodoService: TodoServiceType {
         guard reordered.isEmpty == false else { return }
         items = reordered
         persist()
+        emitEvent(kind: .reordered, todoID: nil)
     }
 
+    // MARK: - Undo / Reset
+
+    /// 마지막 삭제를 복구하고 알림 상태를 갱신합니다.
     public func undoLastDeletion() {
         guard let undoToast else { return }
 
@@ -201,19 +233,28 @@ public final class LocalTodoService: TodoServiceType {
 
         self.undoToast = nil
         persist()
+        // 복구되면 항목 상태 기준으로 알림을 다시 맞춥니다.
+        reminderScheduler.replaceReminders(for: undoToast.deletedItem)
+        emitEvent(kind: .undoDeleted, todoID: undoToast.deletedItem.id)
     }
 
+    /// Undo 토스트 상태를 비웁니다.
     public func clearUndoToast() {
         undoToast = nil
     }
 
-    // 앱의 TODO 데이터를 전체 삭제하고 초기 상태로 되돌립니다.
+    /// 앱의 TODO 데이터를 전체 삭제하고 초기 상태로 되돌립니다.
     public func clearAllTodos() {
         items.removeAll()
         undoToast = nil
         nextLocalID = -1
         persist()
+        // 전체 삭제 시 등록된 TODO 알림도 모두 제거합니다.
+        reminderScheduler.removeAllReminders()
+        emitEvent(kind: .clearedAll, todoID: nil)
     }
+
+    // MARK: - Private
 
     // 목록/ID 상태를 저장소에 반영합니다.
     private func persist() {
@@ -221,6 +262,30 @@ public final class LocalTodoService: TodoServiceType {
             LocalTodoPersistedState(
                 items: items,
                 nextLocalID: nextLocalID
+            )
+        )
+    }
+
+    // 중복/정렬 이슈를 막기 위해 오프셋을 정렬+중복제거합니다.
+    private func normalizeReminderOffsets(_ reminderOffsets: [Int]) -> [Int] {
+        Array(Set(reminderOffsets)).sorted()
+    }
+
+    // 현재 메모리의 모든 항목을 기준으로 알림 상태를 일괄 동기화합니다.
+    private func syncAllReminders() {
+        reminderScheduler.removeAllReminders()
+        for item in items {
+            reminderScheduler.replaceReminders(for: item)
+        }
+    }
+
+    // 도메인 이벤트를 일관된 형태로 발행합니다.
+    private func emitEvent(kind: TodoEventKind, todoID: Int?) {
+        eventPublisher.publish(
+            TodoEvent(
+                kind: kind,
+                todoID: todoID,
+                occurredAt: nowProvider()
             )
         )
     }

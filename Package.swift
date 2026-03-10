@@ -14,7 +14,7 @@ let package = Package(
         .target(
             name: "StudyTodoApp",
             path: "StudyTodoApp",
-            exclude: ["Assets.xcassets", "README.md", "Docs"]
+            exclude: ["Assets.xcassets", "README.md", "Docs", "Supporting"]
         ),
         .testTarget(
             name: "StudyTodoAppTests",

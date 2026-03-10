@@ -1,22 +1,24 @@
 import CoreData
 import Foundation
 
-// 앱 기본 저장소 구현체입니다.
-// UserDefaults 대신 CoreData를 사용해 대량 데이터/확장성 측면을 개선합니다.
-// 전역 singleton을 두지 않고 DI에서 인스턴스를 명시적으로 주입합니다.
+/// 앱 기본 저장소 구현체입니다.
+/// UserDefaults 대신 CoreData를 사용해 대량 데이터/확장성 측면을 개선합니다.
+/// 전역 singleton을 두지 않고 DI에서 인스턴스를 명시적으로 주입합니다.
 public final class CoreDataTodoStore: TodoStore {
+    // MARK: - CoreData Stack
+
     // CoreData 영속성 컨테이너입니다.
     private let container: NSPersistentContainer
     // 접근 편의를 위한 메인 컨텍스트입니다.
     private var context: NSManagedObjectContext { container.viewContext }
 
-    // 디스크 저장 버전 생성자입니다.
+    /// 디스크 저장 버전 생성자입니다.
     public convenience init() {
         self.init(inMemory: false)
     }
 
-    // inMemory=true면 SQLite 파일 대신 메모리 저장소를 사용합니다.
-    // 단위 테스트에서 CoreData를 실제로 검증할 때 사용할 수 있습니다.
+    /// `inMemory == true`면 SQLite 파일 대신 메모리 저장소를 사용합니다.
+    /// - Parameter inMemory: 메모리 저장소 사용 여부입니다.
     public init(inMemory: Bool) {
         let model = Self.makeManagedObjectModel()
         container = NSPersistentContainer(name: "TodoModel", managedObjectModel: model)
@@ -56,6 +58,10 @@ public final class CoreDataTodoStore: TodoStore {
         context.undoManager = nil
     }
 
+    // MARK: - TodoStore
+
+    /// 저장된 스냅샷을 불러옵니다.
+    /// - Returns: 저장된 상태가 있으면 스냅샷, 없으면 `nil`입니다.
     public func loadState() -> LocalTodoPersistedState? {
         var loadedState: LocalTodoPersistedState?
 
@@ -66,6 +72,9 @@ public final class CoreDataTodoStore: TodoStore {
                     id: Int(record.value(forKey: "id") as? Int64 ?? 0),
                     title: record.value(forKey: "title") as? String ?? "",
                     endDate: record.value(forKey: "endDate") as? Date,
+                    reminderOffsets: decodeReminderOffsets(
+                        from: record.value(forKey: "reminderOffsetsRaw") as? String
+                    ),
                     isCompleted: record.value(forKey: "isCompleted") as? Bool ?? false,
                     completedAt: record.value(forKey: "completedAt") as? Date
                 )
@@ -85,6 +94,8 @@ public final class CoreDataTodoStore: TodoStore {
         return loadedState
     }
 
+    /// 전달된 스냅샷으로 저장소를 갱신합니다.
+    /// - Parameter state: 저장할 전체 TODO 상태입니다.
     public func saveState(_ state: LocalTodoPersistedState) {
         context.performAndWait {
             let existingRecords = fetchTodoRecords()
@@ -105,6 +116,7 @@ public final class CoreDataTodoStore: TodoStore {
                 record.setValue(key, forKey: "id")
                 record.setValue(item.title, forKey: "title")
                 record.setValue(item.endDate, forKey: "endDate")
+                record.setValue(encodeReminderOffsets(item.reminderOffsets), forKey: "reminderOffsetsRaw")
                 record.setValue(item.isCompleted, forKey: "isCompleted")
                 record.setValue(item.completedAt, forKey: "completedAt")
                 record.setValue(Int64(index), forKey: "position")
@@ -124,6 +136,8 @@ public final class CoreDataTodoStore: TodoStore {
             saveContextIfNeeded()
         }
     }
+
+    // MARK: - Private Helpers
 
     // 정렬된 TODO 레코드를 조회합니다.
     private func fetchTodoRecords() -> [NSManagedObject] {
@@ -164,6 +178,22 @@ public final class CoreDataTodoStore: TodoStore {
             assertionFailure("CoreData save failed: \(error)")
         }
     }
+
+    // 알림 오프셋 배열을 CoreData 저장용 문자열로 직렬화합니다.
+    private func encodeReminderOffsets(_ offsets: [Int]) -> String {
+        offsets.sorted().map(String.init).joined(separator: ",")
+    }
+
+    // CoreData 문자열을 알림 오프셋 배열로 역직렬화합니다.
+    private func decodeReminderOffsets(from raw: String?) -> [Int] {
+        guard let raw else { return [] }
+        guard raw.isEmpty == false else { return [] }
+
+        return raw
+            .split(separator: ",")
+            .compactMap { Int($0) }
+            .sorted()
+    }
 }
 
 private extension CoreDataTodoStore {
@@ -192,6 +222,11 @@ private extension CoreDataTodoStore {
         todoCompleted.attributeType = .booleanAttributeType
         todoCompleted.isOptional = false
 
+        let todoReminderOffsetsRaw = NSAttributeDescription()
+        todoReminderOffsetsRaw.name = "reminderOffsetsRaw"
+        todoReminderOffsetsRaw.attributeType = .stringAttributeType
+        todoReminderOffsetsRaw.isOptional = true
+
         let todoEndDate = NSAttributeDescription()
         todoEndDate.name = "endDate"
         todoEndDate.attributeType = .dateAttributeType
@@ -207,7 +242,15 @@ private extension CoreDataTodoStore {
         todoPosition.attributeType = .integer64AttributeType
         todoPosition.isOptional = false
 
-        todoEntity.properties = [todoID, todoTitle, todoEndDate, todoCompleted, todoCompletedAt, todoPosition]
+        todoEntity.properties = [
+            todoID,
+            todoTitle,
+            todoEndDate,
+            todoReminderOffsetsRaw,
+            todoCompleted,
+            todoCompletedAt,
+            todoPosition
+        ]
 
         let appStateEntity = NSEntityDescription()
         appStateEntity.name = "TodoAppState"

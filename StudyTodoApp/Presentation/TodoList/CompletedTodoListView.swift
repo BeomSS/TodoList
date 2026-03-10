@@ -1,7 +1,9 @@
 import SwiftUI
 
-// 완료된 TODO만 모아 보여주는 화면입니다.
+/// 완료된 TODO만 모아 보여주는 화면입니다.
 public struct CompletedTodoListView: View {
+    // MARK: - State
+
     // 부모 화면에서 생성한 동일 ViewModel 인스턴스를 관찰합니다.
     @ObservedObject private var viewModel: TodoListViewModel
     // 완료 목록에서 되돌리기 실행 후 노출할 토스트 상태입니다.
@@ -17,10 +19,17 @@ public struct CompletedTodoListView: View {
     // 체크 후 "예"를 누르면 이후 팝업 없이 즉시 되돌리기합니다.
     @AppStorage(TodoAppStorageKey.restoreAlwaysAllow) private var restoreAlwaysAllowed = false
 
+    // MARK: - Init
+
+    /// 완료 TODO 목록 화면을 생성합니다.
+    /// - Parameter viewModel: 메인 화면과 상태를 공유하는 ViewModel입니다.
     public init(viewModel: TodoListViewModel) {
         self.viewModel = viewModel
     }
 
+    // MARK: - Body
+
+    /// 화면 본문입니다.
     public var body: some View {
         ZStack {
             TodoTheme.backgroundGradient.ignoresSafeArea()
@@ -59,6 +68,8 @@ public struct CompletedTodoListView: View {
             dismissRestoreToastTask?.cancel()
         }
     }
+
+    // MARK: - View Sections
 
     // 완료 목록 요약 카드입니다.
     private var summaryCard: some View {
@@ -193,7 +204,11 @@ public struct CompletedTodoListView: View {
         .accessibilityValue("완료됨")
     }
 
+    // MARK: - Restore Actions
+
     // 되돌리기 요청 시 설정에 따라 확인 팝업 또는 즉시 실행을 분기합니다.
+    /// 완료 항목을 진행중으로 되돌리는 요청을 시작합니다.
+    /// - Parameter item: 되돌리기 대상 항목입니다.
     private func requestRestore(for item: TodoItemViewData) {
         if restoreAlwaysAllowed {
             restoreTodo(item)
@@ -206,6 +221,8 @@ public struct CompletedTodoListView: View {
     }
 
     // 완료 항목을 진행중으로 이동하고, 메인 삭제와 동일한 취소 토스트를 띄웁니다.
+    /// 완료 항목을 진행중으로 되돌리고 취소 가능 토스트를 노출합니다.
+    /// - Parameter item: 되돌릴 항목입니다.
     private func restoreTodo(_ item: TodoItemViewData) {
         TodoHaptics.selection()
         Task {
@@ -217,6 +234,8 @@ public struct CompletedTodoListView: View {
             scheduleRestoreToastDismiss()
         }
     }
+
+    // MARK: - Restore Popup / Toast
 
     // 되돌리기 확인 커스텀 팝업입니다.
     private var restoreConfirmPopup: some View {

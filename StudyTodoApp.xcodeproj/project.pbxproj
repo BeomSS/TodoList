@@ -7,6 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		008E331DA7CADCE6CBAB7754 /* TodayTodoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FCE25C11ED3952059C00DB /* TodayTodoProvider.swift */; };
+		0ED61608CE1A6AE32D92B44B /* DefaultClearUndoToastUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAEA096835F650CC5641282 /* DefaultClearUndoToastUseCase.swift */; };
+		115E5DFF19BEBB8560BAD044 /* NoOpTodoReminderPermissionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1160989D8249E2E03AD3332E /* NoOpTodoReminderPermissionChecker.swift */; };
+		1B28FCD723377D556DBAE177 /* View+TodoModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA6B1CD7B45405C9260CE01 /* View+TodoModifiers.swift */; };
+		224E3896E4B16017EDFB5C81 /* DefaultClearAllTodosUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30453A0A85F901B00B2E7683 /* DefaultClearAllTodosUseCase.swift */; };
+		29A08579506E5BA564B2B929 /* ToggleTodoCompletionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FF1841A86C9856911967A7 /* ToggleTodoCompletionUseCase.swift */; };
+		2B1ACD8392436C7BCD0EB993 /* SharedTodayTodoWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A66F371C03F35159CB333C8 /* SharedTodayTodoWidgetSnapshot.swift */; };
+		2B41FEB2C39786A36A3B31F5 /* TodayTodoWidgetSnapshotWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238FF434C86579DBE4BEE227 /* TodayTodoWidgetSnapshotWriting.swift */; };
+		2EE9AB728E5A4AD8B01AFDC6 /* DateDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947383E14E62920C544895AB /* DateDisplay.swift */; };
+		35963663AE2AB7C2FA0E892E /* DefaultToggleTodoCompletionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1850BD65448FC64D36E5DCE9 /* DefaultToggleTodoCompletionUseCase.swift */; };
+		393025785BE68CE8E9B7378A /* TodayTodoWidgetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD78A45B07DF1D8045AAE7 /* TodayTodoWidgetHeaderView.swift */; };
+		3BCDD37DC42A54ADBFF357C7 /* DefaultMoveTodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB47CEF061AFFAD385FA5BE /* DefaultMoveTodoUseCase.swift */; };
+		3FF1A9C234C8E451F8205F56 /* SharedTodayTodoWidgetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA14BDE9A2CEDBF126308AE3 /* SharedTodayTodoWidgetItem.swift */; };
+		446813254F85DA3C90819E31 /* DefaultReadTodoScreenStateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFD6988DE08A848A2B5E252 /* DefaultReadTodoScreenStateUseCase.swift */; };
+		4665E702CCDE8B14ACD0C995 /* TodoTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B53B8E4BD5CBD726A55DB0 /* TodoTheme.swift */; };
+		4AF616687F472DB077E24865 /* MoveTodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C4C5A42B446AD1F237CAD6 /* MoveTodoUseCase.swift */; };
+		4E8D74EA3B71B1945CCD1219 /* DeleteTodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857EBE2DA760359D814B2 /* DeleteTodoUseCase.swift */; };
+		51FDF592794D0C6947CF4346 /* TodoHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7A3666F9B636D3914F19B2 /* TodoHaptics.swift */; };
+		522827DD336E74D6AC37F02F /* DefaultTodoListPartitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F66DA603372CE3B5A872AC /* DefaultTodoListPartitioner.swift */; };
+		56FE202243D3D381A3DB5AA3 /* TodoReminderPermissionChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D900D96890172B3E2B13AF /* TodoReminderPermissionChecking.swift */; };
+		5A3B2825C5FF245AC5D33A65 /* TodoPressableButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610D05965EBC02157B53FDB5 /* TodoPressableButtonStyle.swift */; };
+		642F000FEF6F62FF5EF61646 /* ReorderTodoListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04260AA0C376B96C9CC9AACC /* ReorderTodoListUseCase.swift */; };
+		643DC983F89DA000C040FAE8 /* DefaultUndoTodoDeletionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF846B7A2454333AC1895EB3 /* DefaultUndoTodoDeletionUseCase.swift */; };
+		6AEF629C20446E8B8DE3EECE /* TodayTodoWidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9791731264ED03B3A1D4AE80 /* TodayTodoWidgetConfig.swift */; };
+		6C663D8B08D2E95125721608 /* TodoListPartition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3293CA1B4F079F32D9E0703 /* TodoListPartition.swift */; };
+		702B76B87BA03D1CDCAE0028 /* TodayTodoEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2FD4245D94033A6069BE6B /* TodayTodoEntry.swift */; };
+		713F29DE0216F6C77ABA4ADF /* SharedTodayTodoWidgetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA14BDE9A2CEDBF126308AE3 /* SharedTodayTodoWidgetItem.swift */; };
+		74F5438B9998DA5EC7CDC5A1 /* TodoAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87F5FBB8475551B09686C19 /* TodoAppDelegate.swift */; };
+		7C19ED52B3982E0297E3AC5B /* TodayTodoWidgetEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658933A5205D4407CF6B404D /* TodayTodoWidgetEmptyStateView.swift */; };
+		7CCFFDC5A82F4C1B412517A1 /* DefaultAddTodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F449E798A1A9EB9CD615C1A4 /* DefaultAddTodoUseCase.swift */; };
+		7D394BA4D7D7121F0065342A /* SharedTodayTodoWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A66F371C03F35159CB333C8 /* SharedTodayTodoWidgetSnapshot.swift */; };
+		810C60A7AD53B87A547603CB /* TodoListPartitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49724908C0EDA8064139BE61 /* TodoListPartitioning.swift */; };
+		834D242C782B77324C999EFD /* DefaultUpdateTodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618D309A7EB8A97826F91F69 /* DefaultUpdateTodoUseCase.swift */; };
+		87B5485D2C3CE989311EA385 /* TodoAppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57F3F1826C4E24800E63F1 /* TodoAppStorageKey.swift */; };
+		8AD103D1E38E260195CBEFB7 /* TodoTitleNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8A2B73213AE7DD12850577 /* TodoTitleNormalizer.swift */; };
+		8E47621FCBE5D65BF52E5309 /* TodayTodoWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5466BD0EA94610664494A3E7 /* TodayTodoWidgetView.swift */; };
+		9238864A381C4C792ADD64FB /* TodayTodoEntryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC949C57037C80EBB55E3B35 /* TodayTodoEntryItem.swift */; };
+		97C9E6B85927CE9B7A0C0B07 /* TodayTodoWidgetItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78272C7DE818AE27F7F79C74 /* TodayTodoWidgetItemRowView.swift */; };
+		A4E94B7AD78E4FC2278D5CA0 /* TodayWidgetBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B66E58E42E61020FF7DF6C1 /* TodayWidgetBackgroundModifier.swift */; };
+		AB0397BFA83217CDCC3C088B /* DefaultDeleteTodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19C83F83CFD1E6BD40ADC7 /* DefaultDeleteTodoUseCase.swift */; };
 		B00000000000000000000031 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000011 /* AppDIContainer.swift */; };
 		B00000000000000000000032 /* StudyTodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* StudyTodoApp.swift */; };
 		B0000000000000000000003B /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001B /* TodoListView.swift */; };
@@ -15,8 +55,6 @@
 		B000000000000000000000E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B000000000000000000000E2 /* Assets.xcassets */; };
 		B000000000000000000000F1 /* LocalTodoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000000000000000000000F2 /* LocalTodoService.swift */; };
 		B000000000000000000000F5 /* TodoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000000000000000000000F6 /* TodoStore.swift */; };
-		B000000000000000000000FA /* TodoUseCaseProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000000000000000000000FB /* TodoUseCaseProtocols.swift */; };
-		B000000000000000000000FC /* DefaultTodoUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000000000000000000000FD /* DefaultTodoUseCases.swift */; };
 		B000000000000000000000FE /* LocalTodoPersistedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000000000000000000000FF /* LocalTodoPersistedState.swift */; };
 		B00000000000000000000100 /* InMemoryTodoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000101 /* InMemoryTodoStore.swift */; };
 		B00000000000000000000102 /* CoreDataTodoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000103 /* CoreDataTodoStore.swift */; };
@@ -24,8 +62,36 @@
 		B00000000000000000000106 /* UndoToastState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000107 /* UndoToastState.swift */; };
 		B00000000000000000000109 /* CompletedTodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000108 /* CompletedTodoListView.swift */; };
 		B0000000000000000000010B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000010A /* SettingsView.swift */; };
-		B0000000000000000000010D /* TodoUIShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000010C /* TodoUIShared.swift */; };
 		B0000000000000000000010F /* TodoEditorPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000010E /* TodoEditorPopupView.swift */; };
+		B00000000000000000000111 /* TodoReminderScheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000110 /* TodoReminderScheduling.swift */; };
+		B00000000000000000000113 /* LocalNotificationTodoReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000112 /* LocalNotificationTodoReminderScheduler.swift */; };
+		B00000000000000000000115 /* AppGroupConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000121 /* AppGroupConfig.swift */; };
+		B00000000000000000000117 /* TodayTodoWidgetSnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000122 /* TodayTodoWidgetSnapshotStore.swift */; };
+		B00000000000000000000119 /* TodayTodoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000124 /* TodayTodoWidget.swift */; };
+		B0000000000000000000011B /* TodayTodoWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000125 /* TodayTodoWidgetBundle.swift */; };
+		B0000000000000000000011D /* AppGroupConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000121 /* AppGroupConfig.swift */; };
+		B0000000000000000000011F /* TodayTodoWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B00000000000000000000120 /* TodayTodoWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B0000000000000000000013D /* LocalNotificationPermissionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000013E /* LocalNotificationPermissionChecker.swift */; };
+		B0000000000000000000013F /* TodoNotificationSelectionCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000140 /* TodoNotificationSelectionCenter.swift */; };
+		B6518B3FE8E2FD20067841DA /* TodoEventPublishing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50679B476FDEB66D60903936 /* TodoEventPublishing.swift */; };
+		B6DB59AD33F5268B65343528 /* TodoServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26D72B57B2D5AC92821E735 /* TodoServiceType.swift */; };
+		B786ADC5A660D472825DBA2A /* TodoEventLoggerPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AAEF309C8958F313A4CC66 /* TodoEventLoggerPublisher.swift */; };
+		B911092DF75997B3214CFA83 /* AddTodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6465EFC1609747F458D3C2DE /* AddTodoUseCase.swift */; };
+		BDC511FD785BF247A82032EA /* TodoEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580D844E96C5D5F123491A5 /* TodoEvent.swift */; };
+		BE184D3BC70D1EB583E25C8C /* NoOpTodoReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99A771E1ADD698706DDC9DC /* NoOpTodoReminderScheduler.swift */; };
+		BFFEECCB101E4E9C640EDA90 /* NoOpTodoEventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF470E04663EF25C5FF197C /* NoOpTodoEventPublisher.swift */; };
+		C245FE89C5477F97F39821D7 /* UndoTodoDeletionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1EDD08B07D45A132DBADDA /* UndoTodoDeletionUseCase.swift */; };
+		C2FDAA164078D6890D9B27E8 /* TodoEventKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B6D2500E83A66C45CE2B4E /* TodoEventKind.swift */; };
+		C8EE23EC074DFD87B4F8CE3C /* TodayTodoWidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9791731264ED03B3A1D4AE80 /* TodayTodoWidgetConfig.swift */; };
+		D6911A01F34BE3FCDF86F80A /* ClearUndoToastUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0023FF6F9015D0B39508D527 /* ClearUndoToastUseCase.swift */; };
+		E25AC3EB5A3E6F7EFB4A30F6 /* TodoReminderOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360680D659691168399099FA /* TodoReminderOption.swift */; };
+		E2D2E39EC55E7308480FC177 /* ReadTodoScreenStateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0218B1723E3B63BBCD0AEEA8 /* ReadTodoScreenStateUseCase.swift */; };
+		E39D9CB3AF653D511BDDF0CB /* DefaultReorderTodoListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAEDE2A78D1C5EB52E46B14 /* DefaultReorderTodoListUseCase.swift */; };
+		E598B86E9509B3C37F6AAB2F /* DefaultFetchTodoListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6924E5C14A211A42756618D3 /* DefaultFetchTodoListUseCase.swift */; };
+		E7169A1981C119BCABBA584C /* TodoReminderPermissionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED545EA59923F3F041B753 /* TodoReminderPermissionStatus.swift */; };
+		EEFD016DD9B45ADE85B8D966 /* ClearAllTodosUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0988B30CBA1831628AC230 /* ClearAllTodosUseCase.swift */; };
+		F2A5ED35F3C6808079236F31 /* UpdateTodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C02D6C48A3EC8296CFC1F99 /* UpdateTodoUseCase.swift */; };
+		F9452378529E334EBBE25E61 /* FetchTodoListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B01D7D38C2E780CAC8D3430 /* FetchTodoListUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,9 +102,69 @@
 			remoteGlobalIDString = B00000000000000000000004;
 			remoteInfo = StudyTodoApp;
 		};
+		B00000000000000000000131 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B00000000000000000000130;
+			remoteInfo = TodayTodoWidget;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B0000000000000000000012B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B0000000000000000000011F /* TodayTodoWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0023FF6F9015D0B39508D527 /* ClearUndoToastUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ClearUndoToastUseCase.swift; sourceTree = "<group>"; };
+		0218B1723E3B63BBCD0AEEA8 /* ReadTodoScreenStateUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReadTodoScreenStateUseCase.swift; sourceTree = "<group>"; };
+		04260AA0C376B96C9CC9AACC /* ReorderTodoListUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReorderTodoListUseCase.swift; sourceTree = "<group>"; };
+		0AAEDE2A78D1C5EB52E46B14 /* DefaultReorderTodoListUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultReorderTodoListUseCase.swift; sourceTree = "<group>"; };
+		0F2FD4245D94033A6069BE6B /* TodayTodoEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayTodoEntry.swift; sourceTree = "<group>"; };
+		1160989D8249E2E03AD3332E /* NoOpTodoReminderPermissionChecker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoOpTodoReminderPermissionChecker.swift; sourceTree = "<group>"; };
+		1850BD65448FC64D36E5DCE9 /* DefaultToggleTodoCompletionUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultToggleTodoCompletionUseCase.swift; sourceTree = "<group>"; };
+		18F66DA603372CE3B5A872AC /* DefaultTodoListPartitioner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultTodoListPartitioner.swift; sourceTree = "<group>"; };
+		238FF434C86579DBE4BEE227 /* TodayTodoWidgetSnapshotWriting.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayTodoWidgetSnapshotWriting.swift; sourceTree = "<group>"; };
+		2FFD6988DE08A848A2B5E252 /* DefaultReadTodoScreenStateUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultReadTodoScreenStateUseCase.swift; sourceTree = "<group>"; };
+		30453A0A85F901B00B2E7683 /* DefaultClearAllTodosUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultClearAllTodosUseCase.swift; sourceTree = "<group>"; };
+		360680D659691168399099FA /* TodoReminderOption.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoReminderOption.swift; sourceTree = "<group>"; };
+		3F57F3F1826C4E24800E63F1 /* TodoAppStorageKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoAppStorageKey.swift; sourceTree = "<group>"; };
+		4580D844E96C5D5F123491A5 /* TodoEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoEvent.swift; sourceTree = "<group>"; };
+		47D900D96890172B3E2B13AF /* TodoReminderPermissionChecking.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoReminderPermissionChecking.swift; sourceTree = "<group>"; };
+		49724908C0EDA8064139BE61 /* TodoListPartitioning.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoListPartitioning.swift; sourceTree = "<group>"; };
+		4AF470E04663EF25C5FF197C /* NoOpTodoEventPublisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoOpTodoEventPublisher.swift; sourceTree = "<group>"; };
+		4C02D6C48A3EC8296CFC1F99 /* UpdateTodoUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UpdateTodoUseCase.swift; sourceTree = "<group>"; };
+		50679B476FDEB66D60903936 /* TodoEventPublishing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoEventPublishing.swift; sourceTree = "<group>"; };
+		5466BD0EA94610664494A3E7 /* TodayTodoWidgetView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayTodoWidgetView.swift; sourceTree = "<group>"; };
+		5B66E58E42E61020FF7DF6C1 /* TodayWidgetBackgroundModifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayWidgetBackgroundModifier.swift; sourceTree = "<group>"; };
+		610D05965EBC02157B53FDB5 /* TodoPressableButtonStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoPressableButtonStyle.swift; sourceTree = "<group>"; };
+		618D309A7EB8A97826F91F69 /* DefaultUpdateTodoUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultUpdateTodoUseCase.swift; sourceTree = "<group>"; };
+		6465EFC1609747F458D3C2DE /* AddTodoUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AddTodoUseCase.swift; sourceTree = "<group>"; };
+		658933A5205D4407CF6B404D /* TodayTodoWidgetEmptyStateView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayTodoWidgetEmptyStateView.swift; sourceTree = "<group>"; };
+		6924E5C14A211A42756618D3 /* DefaultFetchTodoListUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultFetchTodoListUseCase.swift; sourceTree = "<group>"; };
+		71AAEF309C8958F313A4CC66 /* TodoEventLoggerPublisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoEventLoggerPublisher.swift; sourceTree = "<group>"; };
+		71FD78A45B07DF1D8045AAE7 /* TodayTodoWidgetHeaderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayTodoWidgetHeaderView.swift; sourceTree = "<group>"; };
+		78272C7DE818AE27F7F79C74 /* TodayTodoWidgetItemRowView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayTodoWidgetItemRowView.swift; sourceTree = "<group>"; };
+		7EB47CEF061AFFAD385FA5BE /* DefaultMoveTodoUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultMoveTodoUseCase.swift; sourceTree = "<group>"; };
+		82B53B8E4BD5CBD726A55DB0 /* TodoTheme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoTheme.swift; sourceTree = "<group>"; };
+		83C4C5A42B446AD1F237CAD6 /* MoveTodoUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MoveTodoUseCase.swift; sourceTree = "<group>"; };
+		8A8857EBE2DA760359D814B2 /* DeleteTodoUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DeleteTodoUseCase.swift; sourceTree = "<group>"; };
+		8B8A2B73213AE7DD12850577 /* TodoTitleNormalizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoTitleNormalizer.swift; sourceTree = "<group>"; };
+		947383E14E62920C544895AB /* DateDisplay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DateDisplay.swift; sourceTree = "<group>"; };
+		9791731264ED03B3A1D4AE80 /* TodayTodoWidgetConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayTodoWidgetConfig.swift; sourceTree = "<group>"; };
+		9A66F371C03F35159CB333C8 /* SharedTodayTodoWidgetSnapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedTodayTodoWidgetSnapshot.swift; sourceTree = "<group>"; };
+		9B01D7D38C2E780CAC8D3430 /* FetchTodoListUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FetchTodoListUseCase.swift; sourceTree = "<group>"; };
+		AEA6B1CD7B45405C9260CE01 /* View+TodoModifiers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "View+TodoModifiers.swift"; sourceTree = "<group>"; };
 		B00000000000000000000002 /* StudyTodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyTodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00000000000000000000003 /* StudyTodoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyTodoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00000000000000000000011 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
@@ -50,8 +176,6 @@
 		B000000000000000000000E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B000000000000000000000F2 /* LocalTodoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTodoService.swift; sourceTree = "<group>"; };
 		B000000000000000000000F6 /* TodoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStore.swift; sourceTree = "<group>"; };
-		B000000000000000000000FB /* TodoUseCaseProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUseCaseProtocols.swift; sourceTree = "<group>"; };
-		B000000000000000000000FD /* DefaultTodoUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTodoUseCases.swift; sourceTree = "<group>"; };
 		B000000000000000000000FF /* LocalTodoPersistedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTodoPersistedState.swift; sourceTree = "<group>"; };
 		B00000000000000000000101 /* InMemoryTodoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryTodoStore.swift; sourceTree = "<group>"; };
 		B00000000000000000000103 /* CoreDataTodoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTodoStore.swift; sourceTree = "<group>"; };
@@ -59,8 +183,36 @@
 		B00000000000000000000107 /* UndoToastState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoToastState.swift; sourceTree = "<group>"; };
 		B00000000000000000000108 /* CompletedTodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTodoListView.swift; sourceTree = "<group>"; };
 		B0000000000000000000010A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		B0000000000000000000010C /* TodoUIShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoUIShared.swift; sourceTree = "<group>"; };
 		B0000000000000000000010E /* TodoEditorPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditorPopupView.swift; sourceTree = "<group>"; };
+		B00000000000000000000110 /* TodoReminderScheduling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoReminderScheduling.swift; sourceTree = "<group>"; };
+		B00000000000000000000112 /* LocalNotificationTodoReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationTodoReminderScheduler.swift; sourceTree = "<group>"; };
+		B00000000000000000000120 /* TodayTodoWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayTodoWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000121 /* AppGroupConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupConfig.swift; sourceTree = "<group>"; };
+		B00000000000000000000122 /* TodayTodoWidgetSnapshotStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTodoWidgetSnapshotStore.swift; sourceTree = "<group>"; };
+		B00000000000000000000124 /* TodayTodoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTodoWidget.swift; sourceTree = "<group>"; };
+		B00000000000000000000125 /* TodayTodoWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTodoWidgetBundle.swift; sourceTree = "<group>"; };
+		B00000000000000000000126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B00000000000000000000127 /* TodayTodoWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayTodoWidget.entitlements; sourceTree = "<group>"; };
+		B00000000000000000000128 /* StudyTodoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyTodoApp.entitlements; sourceTree = "<group>"; };
+		B0000000000000000000013E /* LocalNotificationPermissionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationPermissionChecker.swift; sourceTree = "<group>"; };
+		B00000000000000000000140 /* TodoNotificationSelectionCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNotificationSelectionCenter.swift; sourceTree = "<group>"; };
+		B26D72B57B2D5AC92821E735 /* TodoServiceType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoServiceType.swift; sourceTree = "<group>"; };
+		BC1EDD08B07D45A132DBADDA /* UndoTodoDeletionUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UndoTodoDeletionUseCase.swift; sourceTree = "<group>"; };
+		BC949C57037C80EBB55E3B35 /* TodayTodoEntryItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayTodoEntryItem.swift; sourceTree = "<group>"; };
+		C3293CA1B4F079F32D9E0703 /* TodoListPartition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoListPartition.swift; sourceTree = "<group>"; };
+		C87F5FBB8475551B09686C19 /* TodoAppDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoAppDelegate.swift; sourceTree = "<group>"; };
+		C9ED545EA59923F3F041B753 /* TodoReminderPermissionStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoReminderPermissionStatus.swift; sourceTree = "<group>"; };
+		D3FF1841A86C9856911967A7 /* ToggleTodoCompletionUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ToggleTodoCompletionUseCase.swift; sourceTree = "<group>"; };
+		D99A771E1ADD698706DDC9DC /* NoOpTodoReminderScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoOpTodoReminderScheduler.swift; sourceTree = "<group>"; };
+		E0B6D2500E83A66C45CE2B4E /* TodoEventKind.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoEventKind.swift; sourceTree = "<group>"; };
+		ED7A3666F9B636D3914F19B2 /* TodoHaptics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoHaptics.swift; sourceTree = "<group>"; };
+		F3FCE25C11ED3952059C00DB /* TodayTodoProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayTodoProvider.swift; sourceTree = "<group>"; };
+		F449E798A1A9EB9CD615C1A4 /* DefaultAddTodoUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultAddTodoUseCase.swift; sourceTree = "<group>"; };
+		FA14BDE9A2CEDBF126308AE3 /* SharedTodayTodoWidgetItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedTodayTodoWidgetItem.swift; sourceTree = "<group>"; };
+		FA19C83F83CFD1E6BD40ADC7 /* DefaultDeleteTodoUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultDeleteTodoUseCase.swift; sourceTree = "<group>"; };
+		FCAEA096835F650CC5641282 /* DefaultClearUndoToastUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultClearUndoToastUseCase.swift; sourceTree = "<group>"; };
+		FF0988B30CBA1831628AC230 /* ClearAllTodosUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ClearAllTodosUseCase.swift; sourceTree = "<group>"; };
+		FF846B7A2454333AC1895EB3 /* DefaultUndoTodoDeletionUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultUndoTodoDeletionUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,13 +230,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B0000000000000000000012C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78F669F37433E7E782A08947 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				71AAEF309C8958F313A4CC66 /* TodoEventLoggerPublisher.swift */,
+			);
+			name = Analytics;
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 		B00000000000000000000071 = {
 			isa = PBXGroup;
 			children = (
 				B00000000000000000000072 /* StudyTodoApp */,
+				B00000000000000000000123 /* TodayTodoWidget */,
 				B00000000000000000000073 /* StudyTodoAppTests */,
 				B00000000000000000000074 /* Products */,
 			);
@@ -95,6 +264,8 @@
 			children = (
 				B000000000000000000000E2 /* Assets.xcassets */,
 				B00000000000000000000075 /* App */,
+				B00000000000000000000136 /* Shared */,
+				B00000000000000000000137 /* Supporting */,
 				B00000000000000000000081 /* Domain */,
 				B00000000000000000000082 /* Data */,
 				B00000000000000000000078 /* Presentation */,
@@ -116,6 +287,7 @@
 			children = (
 				B00000000000000000000002 /* StudyTodoApp.app */,
 				B00000000000000000000003 /* StudyTodoAppTests.xctest */,
+				B00000000000000000000120 /* TodayTodoWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,7 +296,9 @@
 			isa = PBXGroup;
 			children = (
 				B00000000000000000000011 /* AppDIContainer.swift */,
+				B00000000000000000000140 /* TodoNotificationSelectionCenter.swift */,
 				B00000000000000000000012 /* StudyTodoApp.swift */,
+				C87F5FBB8475551B09686C19 /* TodoAppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -135,6 +309,30 @@
 				B00000000000000000000080 /* TodoList */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B00000000000000000000080 /* TodoList */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000105 /* TodoItemViewData.swift */,
+				B00000000000000000000107 /* UndoToastState.swift */,
+				B00000000000000000000108 /* CompletedTodoListView.swift */,
+				B0000000000000000000010A /* SettingsView.swift */,
+				B0000000000000000000010E /* TodoEditorPopupView.swift */,
+				B0000000000000000000001B /* TodoListView.swift */,
+				B0000000000000000000001C /* TodoListViewModel.swift */,
+				947383E14E62920C544895AB /* DateDisplay.swift */,
+				3F57F3F1826C4E24800E63F1 /* TodoAppStorageKey.swift */,
+				ED7A3666F9B636D3914F19B2 /* TodoHaptics.swift */,
+				610D05965EBC02157B53FDB5 /* TodoPressableButtonStyle.swift */,
+				360680D659691168399099FA /* TodoReminderOption.swift */,
+				82B53B8E4BD5CBD726A55DB0 /* TodoTheme.swift */,
+				AEA6B1CD7B45405C9260CE01 /* View+TodoModifiers.swift */,
+				49724908C0EDA8064139BE61 /* TodoListPartitioning.swift */,
+				18F66DA603372CE3B5A872AC /* DefaultTodoListPartitioner.swift */,
+				C3293CA1B4F079F32D9E0703 /* TodoListPartition.swift */,
+			);
+			path = TodoList;
 			sourceTree = "<group>";
 		};
 		B00000000000000000000081 /* Domain */ = {
@@ -148,7 +346,10 @@
 		B00000000000000000000082 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				B00000000000000000000114 /* Notifications */,
+				B0000000000000000000012A /* Widget */,
 				B00000000000000000000084 /* Persistence */,
+				78F669F37433E7E782A08947 /* Analytics */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -157,8 +358,39 @@
 			isa = PBXGroup;
 			children = (
 				B000000000000000000000F2 /* LocalTodoService.swift */,
-				B000000000000000000000FB /* TodoUseCaseProtocols.swift */,
-				B000000000000000000000FD /* DefaultTodoUseCases.swift */,
+				B00000000000000000000110 /* TodoReminderScheduling.swift */,
+				6465EFC1609747F458D3C2DE /* AddTodoUseCase.swift */,
+				FF0988B30CBA1831628AC230 /* ClearAllTodosUseCase.swift */,
+				0023FF6F9015D0B39508D527 /* ClearUndoToastUseCase.swift */,
+				F449E798A1A9EB9CD615C1A4 /* DefaultAddTodoUseCase.swift */,
+				30453A0A85F901B00B2E7683 /* DefaultClearAllTodosUseCase.swift */,
+				FCAEA096835F650CC5641282 /* DefaultClearUndoToastUseCase.swift */,
+				FA19C83F83CFD1E6BD40ADC7 /* DefaultDeleteTodoUseCase.swift */,
+				6924E5C14A211A42756618D3 /* DefaultFetchTodoListUseCase.swift */,
+				7EB47CEF061AFFAD385FA5BE /* DefaultMoveTodoUseCase.swift */,
+				2FFD6988DE08A848A2B5E252 /* DefaultReadTodoScreenStateUseCase.swift */,
+				0AAEDE2A78D1C5EB52E46B14 /* DefaultReorderTodoListUseCase.swift */,
+				1850BD65448FC64D36E5DCE9 /* DefaultToggleTodoCompletionUseCase.swift */,
+				FF846B7A2454333AC1895EB3 /* DefaultUndoTodoDeletionUseCase.swift */,
+				618D309A7EB8A97826F91F69 /* DefaultUpdateTodoUseCase.swift */,
+				8A8857EBE2DA760359D814B2 /* DeleteTodoUseCase.swift */,
+				9B01D7D38C2E780CAC8D3430 /* FetchTodoListUseCase.swift */,
+				83C4C5A42B446AD1F237CAD6 /* MoveTodoUseCase.swift */,
+				1160989D8249E2E03AD3332E /* NoOpTodoReminderPermissionChecker.swift */,
+				D99A771E1ADD698706DDC9DC /* NoOpTodoReminderScheduler.swift */,
+				0218B1723E3B63BBCD0AEEA8 /* ReadTodoScreenStateUseCase.swift */,
+				04260AA0C376B96C9CC9AACC /* ReorderTodoListUseCase.swift */,
+				47D900D96890172B3E2B13AF /* TodoReminderPermissionChecking.swift */,
+				C9ED545EA59923F3F041B753 /* TodoReminderPermissionStatus.swift */,
+				D3FF1841A86C9856911967A7 /* ToggleTodoCompletionUseCase.swift */,
+				BC1EDD08B07D45A132DBADDA /* UndoTodoDeletionUseCase.swift */,
+				4C02D6C48A3EC8296CFC1F99 /* UpdateTodoUseCase.swift */,
+				4AF470E04663EF25C5FF197C /* NoOpTodoEventPublisher.swift */,
+				4580D844E96C5D5F123491A5 /* TodoEvent.swift */,
+				50679B476FDEB66D60903936 /* TodoEventPublishing.swift */,
+				E0B6D2500E83A66C45CE2B4E /* TodoEventKind.swift */,
+				B26D72B57B2D5AC92821E735 /* TodoServiceType.swift */,
+				8B8A2B73213AE7DD12850577 /* TodoTitleNormalizer.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -174,19 +406,60 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		B00000000000000000000080 /* TodoList */ = {
+		B00000000000000000000114 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				B00000000000000000000105 /* TodoItemViewData.swift */,
-				B00000000000000000000107 /* UndoToastState.swift */,
-				B00000000000000000000108 /* CompletedTodoListView.swift */,
-				B0000000000000000000010A /* SettingsView.swift */,
-				B0000000000000000000010E /* TodoEditorPopupView.swift */,
-				B0000000000000000000001B /* TodoListView.swift */,
-				B0000000000000000000001C /* TodoListViewModel.swift */,
-				B0000000000000000000010C /* TodoUIShared.swift */,
+				B0000000000000000000013E /* LocalNotificationPermissionChecker.swift */,
+				B00000000000000000000112 /* LocalNotificationTodoReminderScheduler.swift */,
 			);
-			path = TodoList;
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		B00000000000000000000123 /* TodayTodoWidget */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000124 /* TodayTodoWidget.swift */,
+				B00000000000000000000125 /* TodayTodoWidgetBundle.swift */,
+				B00000000000000000000126 /* Info.plist */,
+				B00000000000000000000127 /* TodayTodoWidget.entitlements */,
+				0F2FD4245D94033A6069BE6B /* TodayTodoEntry.swift */,
+				F3FCE25C11ED3952059C00DB /* TodayTodoProvider.swift */,
+				5466BD0EA94610664494A3E7 /* TodayTodoWidgetView.swift */,
+				BC949C57037C80EBB55E3B35 /* TodayTodoEntryItem.swift */,
+				658933A5205D4407CF6B404D /* TodayTodoWidgetEmptyStateView.swift */,
+				71FD78A45B07DF1D8045AAE7 /* TodayTodoWidgetHeaderView.swift */,
+				78272C7DE818AE27F7F79C74 /* TodayTodoWidgetItemRowView.swift */,
+				5B66E58E42E61020FF7DF6C1 /* TodayWidgetBackgroundModifier.swift */,
+			);
+			path = TodayTodoWidget;
+			sourceTree = "<group>";
+		};
+		B0000000000000000000012A /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000122 /* TodayTodoWidgetSnapshotStore.swift */,
+				238FF434C86579DBE4BEE227 /* TodayTodoWidgetSnapshotWriting.swift */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+		B00000000000000000000136 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000121 /* AppGroupConfig.swift */,
+				FA14BDE9A2CEDBF126308AE3 /* SharedTodayTodoWidgetItem.swift */,
+				9A66F371C03F35159CB333C8 /* SharedTodayTodoWidgetSnapshot.swift */,
+				9791731264ED03B3A1D4AE80 /* TodayTodoWidgetConfig.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B00000000000000000000137 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000128 /* StudyTodoApp.entitlements */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,10 +472,12 @@
 				B00000000000000000000091 /* Sources */,
 				B00000000000000000000061 /* Frameworks */,
 				B00000000000000000000092 /* Resources */,
+				B0000000000000000000012B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B00000000000000000000132 /* PBXTargetDependency */,
 			);
 			name = StudyTodoApp;
 			productName = StudyTodoApp;
@@ -227,6 +502,23 @@
 			productReference = B00000000000000000000003 /* StudyTodoAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B00000000000000000000130 /* TodayTodoWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B00000000000000000000135 /* Build configuration list for PBXNativeTarget "TodayTodoWidget" */;
+			buildPhases = (
+				B0000000000000000000012D /* Sources */,
+				B0000000000000000000012C /* Frameworks */,
+				B0000000000000000000012E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TodayTodoWidget;
+			productName = TodayTodoWidget;
+			productReference = B00000000000000000000120 /* TodayTodoWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -243,6 +535,9 @@
 					B00000000000000000000005 = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = B00000000000000000000004;
+					};
+					B00000000000000000000130 = {
+						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
@@ -261,6 +556,7 @@
 			targets = (
 				B00000000000000000000004 /* StudyTodoApp */,
 				B00000000000000000000005 /* StudyTodoAppTests */,
+				B00000000000000000000130 /* TodayTodoWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -275,6 +571,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B00000000000000000000096 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0000000000000000000012E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -297,14 +600,65 @@
 				B00000000000000000000109 /* CompletedTodoListView.swift in Sources */,
 				B0000000000000000000010B /* SettingsView.swift in Sources */,
 				B0000000000000000000010F /* TodoEditorPopupView.swift in Sources */,
-				B0000000000000000000010D /* TodoUIShared.swift in Sources */,
+				B00000000000000000000115 /* AppGroupConfig.swift in Sources */,
+				B0000000000000000000013F /* TodoNotificationSelectionCenter.swift in Sources */,
 				B000000000000000000000F1 /* LocalTodoService.swift in Sources */,
-				B000000000000000000000FA /* TodoUseCaseProtocols.swift in Sources */,
-				B000000000000000000000FC /* DefaultTodoUseCases.swift in Sources */,
+				B00000000000000000000111 /* TodoReminderScheduling.swift in Sources */,
+				B00000000000000000000113 /* LocalNotificationTodoReminderScheduler.swift in Sources */,
+				B0000000000000000000013D /* LocalNotificationPermissionChecker.swift in Sources */,
+				B00000000000000000000117 /* TodayTodoWidgetSnapshotStore.swift in Sources */,
 				B000000000000000000000FE /* LocalTodoPersistedState.swift in Sources */,
 				B000000000000000000000F5 /* TodoStore.swift in Sources */,
 				B00000000000000000000100 /* InMemoryTodoStore.swift in Sources */,
 				B00000000000000000000102 /* CoreDataTodoStore.swift in Sources */,
+				74F5438B9998DA5EC7CDC5A1 /* TodoAppDelegate.swift in Sources */,
+				B911092DF75997B3214CFA83 /* AddTodoUseCase.swift in Sources */,
+				EEFD016DD9B45ADE85B8D966 /* ClearAllTodosUseCase.swift in Sources */,
+				D6911A01F34BE3FCDF86F80A /* ClearUndoToastUseCase.swift in Sources */,
+				7CCFFDC5A82F4C1B412517A1 /* DefaultAddTodoUseCase.swift in Sources */,
+				224E3896E4B16017EDFB5C81 /* DefaultClearAllTodosUseCase.swift in Sources */,
+				0ED61608CE1A6AE32D92B44B /* DefaultClearUndoToastUseCase.swift in Sources */,
+				AB0397BFA83217CDCC3C088B /* DefaultDeleteTodoUseCase.swift in Sources */,
+				E598B86E9509B3C37F6AAB2F /* DefaultFetchTodoListUseCase.swift in Sources */,
+				3BCDD37DC42A54ADBFF357C7 /* DefaultMoveTodoUseCase.swift in Sources */,
+				446813254F85DA3C90819E31 /* DefaultReadTodoScreenStateUseCase.swift in Sources */,
+				E39D9CB3AF653D511BDDF0CB /* DefaultReorderTodoListUseCase.swift in Sources */,
+				35963663AE2AB7C2FA0E892E /* DefaultToggleTodoCompletionUseCase.swift in Sources */,
+				643DC983F89DA000C040FAE8 /* DefaultUndoTodoDeletionUseCase.swift in Sources */,
+				834D242C782B77324C999EFD /* DefaultUpdateTodoUseCase.swift in Sources */,
+				4E8D74EA3B71B1945CCD1219 /* DeleteTodoUseCase.swift in Sources */,
+				F9452378529E334EBBE25E61 /* FetchTodoListUseCase.swift in Sources */,
+				4AF616687F472DB077E24865 /* MoveTodoUseCase.swift in Sources */,
+				115E5DFF19BEBB8560BAD044 /* NoOpTodoReminderPermissionChecker.swift in Sources */,
+				BE184D3BC70D1EB583E25C8C /* NoOpTodoReminderScheduler.swift in Sources */,
+				E2D2E39EC55E7308480FC177 /* ReadTodoScreenStateUseCase.swift in Sources */,
+				642F000FEF6F62FF5EF61646 /* ReorderTodoListUseCase.swift in Sources */,
+				56FE202243D3D381A3DB5AA3 /* TodoReminderPermissionChecking.swift in Sources */,
+				E7169A1981C119BCABBA584C /* TodoReminderPermissionStatus.swift in Sources */,
+				29A08579506E5BA564B2B929 /* ToggleTodoCompletionUseCase.swift in Sources */,
+				C245FE89C5477F97F39821D7 /* UndoTodoDeletionUseCase.swift in Sources */,
+				F2A5ED35F3C6808079236F31 /* UpdateTodoUseCase.swift in Sources */,
+				2EE9AB728E5A4AD8B01AFDC6 /* DateDisplay.swift in Sources */,
+				87B5485D2C3CE989311EA385 /* TodoAppStorageKey.swift in Sources */,
+				51FDF592794D0C6947CF4346 /* TodoHaptics.swift in Sources */,
+				5A3B2825C5FF245AC5D33A65 /* TodoPressableButtonStyle.swift in Sources */,
+				E25AC3EB5A3E6F7EFB4A30F6 /* TodoReminderOption.swift in Sources */,
+				4665E702CCDE8B14ACD0C995 /* TodoTheme.swift in Sources */,
+				1B28FCD723377D556DBAE177 /* View+TodoModifiers.swift in Sources */,
+				713F29DE0216F6C77ABA4ADF /* SharedTodayTodoWidgetItem.swift in Sources */,
+				2B1ACD8392436C7BCD0EB993 /* SharedTodayTodoWidgetSnapshot.swift in Sources */,
+				C8EE23EC074DFD87B4F8CE3C /* TodayTodoWidgetConfig.swift in Sources */,
+				2B41FEB2C39786A36A3B31F5 /* TodayTodoWidgetSnapshotWriting.swift in Sources */,
+				BFFEECCB101E4E9C640EDA90 /* NoOpTodoEventPublisher.swift in Sources */,
+				BDC511FD785BF247A82032EA /* TodoEvent.swift in Sources */,
+				B6518B3FE8E2FD20067841DA /* TodoEventPublishing.swift in Sources */,
+				810C60A7AD53B87A547603CB /* TodoListPartitioning.swift in Sources */,
+				B786ADC5A660D472825DBA2A /* TodoEventLoggerPublisher.swift in Sources */,
+				C2FDAA164078D6890D9B27E8 /* TodoEventKind.swift in Sources */,
+				B6DB59AD33F5268B65343528 /* TodoServiceType.swift in Sources */,
+				8AD103D1E38E260195CBEFB7 /* TodoTitleNormalizer.swift in Sources */,
+				522827DD336E74D6AC37F02F /* DefaultTodoListPartitioner.swift in Sources */,
+				6C663D8B08D2E95125721608 /* TodoListPartition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +670,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B0000000000000000000012D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00000000000000000000119 /* TodayTodoWidget.swift in Sources */,
+				B0000000000000000000011B /* TodayTodoWidgetBundle.swift in Sources */,
+				B0000000000000000000011D /* AppGroupConfig.swift in Sources */,
+				3FF1A9C234C8E451F8205F56 /* SharedTodayTodoWidgetItem.swift in Sources */,
+				7D394BA4D7D7121F0065342A /* SharedTodayTodoWidgetSnapshot.swift in Sources */,
+				6AEF629C20446E8B8DE3EECE /* TodayTodoWidgetConfig.swift in Sources */,
+				702B76B87BA03D1CDCAE0028 /* TodayTodoEntry.swift in Sources */,
+				008E331DA7CADCE6CBAB7754 /* TodayTodoProvider.swift in Sources */,
+				8E47621FCBE5D65BF52E5309 /* TodayTodoWidgetView.swift in Sources */,
+				9238864A381C4C792ADD64FB /* TodayTodoEntryItem.swift in Sources */,
+				7C19ED52B3982E0297E3AC5B /* TodayTodoWidgetEmptyStateView.swift in Sources */,
+				393025785BE68CE8E9B7378A /* TodayTodoWidgetHeaderView.swift in Sources */,
+				97C9E6B85927CE9B7A0C0B07 /* TodayTodoWidgetItemRowView.swift in Sources */,
+				A4E94B7AD78E4FC2278D5CA0 /* TodayWidgetBackgroundModifier.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -323,6 +698,11 @@
 			isa = PBXTargetDependency;
 			target = B00000000000000000000004 /* StudyTodoApp */;
 			targetProxy = B00000000000000000000050 /* PBXContainerItemProxy */;
+		};
+		B00000000000000000000132 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B00000000000000000000130 /* TodayTodoWidget */;
+			targetProxy = B00000000000000000000131 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -398,6 +778,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StudyTodoApp/Supporting/StudyTodoApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BUQ8UP3ZV9;
@@ -427,6 +808,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StudyTodoApp/Supporting/StudyTodoApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BUQ8UP3ZV9;
@@ -491,6 +873,60 @@
 			};
 			name = Release;
 		};
+		B00000000000000000000133 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = TodayTodoWidget/TodayTodoWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BUQ8UP3ZV9;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TodayTodoWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hmp.sample.TodayTodoWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B00000000000000000000134 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = TodayTodoWidget/TodayTodoWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BUQ8UP3ZV9;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TodayTodoWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hmp.sample.TodayTodoWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -517,6 +953,15 @@
 			buildConfigurations = (
 				B000000000000000000000A1 /* Debug */,
 				B000000000000000000000A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B00000000000000000000135 /* Build configuration list for PBXNativeTarget "TodayTodoWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B00000000000000000000133 /* Debug */,
+				B00000000000000000000134 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

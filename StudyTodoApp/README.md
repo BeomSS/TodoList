@@ -20,11 +20,19 @@ StudyTodoApp/
   App/
     StudyTodoApp.swift
     AppDIContainer.swift
+    TodoAppDelegate.swift
   Domain/
     Todo/
-      TodoUseCaseProtocols.swift
-      DefaultTodoUseCases.swift
+      FetchTodoListUseCase.swift
+      AddTodoUseCase.swift
+      ...
+      DefaultFetchTodoListUseCase.swift
+      DefaultAddTodoUseCase.swift
+      ...
       LocalTodoService.swift
+      TodoReminderScheduling.swift
+      TodoReminderPermissionStatus.swift
+      TodoReminderPermissionChecking.swift
   Data/
     Persistence/
       LocalTodoPersistedState.swift
@@ -38,6 +46,20 @@ StudyTodoApp/
       CompletedTodoListView.swift
       TodoListView.swift
       TodoListViewModel.swift
+      TodoTheme.swift
+      TodoReminderOption.swift
+      View+TodoModifiers.swift
+  Shared/
+    AppGroupConfig.swift
+    TodayTodoWidgetConfig.swift
+    SharedTodayTodoWidgetSnapshot.swift
+    SharedTodayTodoWidgetItem.swift
+TodayTodoWidget/
+  TodayTodoWidget.swift
+  TodayTodoEntry.swift
+  TodayTodoProvider.swift
+  TodayTodoWidgetView.swift
+  TodayTodoWidgetComponents.swift
 StudyTodoAppTests/
   TodoListViewModelTests.swift
 ```
@@ -45,6 +67,11 @@ StudyTodoAppTests/
 ## 품질 문서
 - `Docs/TESTING_STRATEGY.md`: 커버리지 기준선, 테스트 작성 규칙, 템플릿
 - `Docs/RELEASE_CHECKLIST.md`: 앱 배포 전 확인 항목
+
+## 확장 포인트
+- `TodoEventPublishing`: TODO 도메인 이벤트(추가/수정/삭제/정렬/전체삭제) 발행 지점
+- `TodoListPartitioning`: 화면별 목록 분리/정렬 전략 주입 지점
+- `TodayTodoWidgetSnapshotWriting`: 위젯 스냅샷 저장 매체 교체 지점
 
 ## 주요 기능
 - 할 일 추가/삭제

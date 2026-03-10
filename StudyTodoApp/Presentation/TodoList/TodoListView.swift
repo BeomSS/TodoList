@@ -1,7 +1,12 @@
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
-// TODO 메인 화면입니다.
+/// 진행 중 TODO를 관리하는 메인 화면입니다.
 public struct TodoListView: View {
+    // MARK: - State
+
     // 화면 생명주기 동안 ViewModel 인스턴스를 유지합니다.
     @StateObject private var viewModel: TodoListViewModel
 
@@ -9,22 +14,42 @@ public struct TodoListView: View {
     @State private var draftTitle = ""
     @State private var draftHasEndDate = false
     @State private var draftEndDate = Date()
+    @State private var draftReminderOffsets: [Int] = []
     @State private var isAddTodoPopupPresented = false
     // 수정 팝업 임시 상태
     @State private var editDraftTitle = ""
     @State private var editHasEndDate = false
     @State private var editEndDate = Date()
+    @State private var editReminderOffsets: [Int] = []
     @State private var isEditTodoPopupPresented = false
     @State private var editingTodoID: Int?
+    // 알림 권한 거부 상태 안내 알럿 노출 여부입니다.
+    @State private var isReminderPermissionAlertPresented = false
+    // 알럿에서 현재 처리 중인 액션(추가/수정)입니다.
+    @State private var reminderPermissionAlertMode: ReminderPermissionAlertMode = .add
+    // 알림 탭으로 선택된 TODO ID를 전달받는 공유 센터입니다.
+    @StateObject private var notificationSelectionCenter = TodoNotificationSelectionCenter.shared
+    // 화면에서 강조 표시 중인 TODO ID입니다.
+    @State private var highlightedTodoID: Int?
+    // 강조 표시 자동 해제를 위한 예약 작업입니다.
+    @State private var clearHighlightedTodoTask: Task<Void, Never>?
+    // 특정 TODO로 스크롤하기 위한 임시 대상 ID입니다.
+    @State private var pendingScrollTodoID: Int?
     // 정렬 모드 활성 상태입니다. true일 때만 리스트 이동 핸들을 노출합니다.
     @State private var isReorderMode = false
     // 완료 처리 애니메이션이 진행 중인 TODO ID 집합입니다.
     @State private var completingTodoIDs: Set<Int> = []
     @FocusState private var isPopupInputFocused: Bool
 
+    // MARK: - Init
+
+    /// 메인 TODO 화면을 생성합니다.
+    /// - Parameter viewModel: 화면 상태와 비즈니스 액션을 제공하는 ViewModel입니다.
     public init(viewModel: TodoListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
+
+    // MARK: - Derived Values
 
     // 완료 개수
     private var completedCount: Int {
@@ -49,6 +74,9 @@ public struct TodoListView: View {
         }.count
     }
 
+    // MARK: - Body
+
+    /// 화면 본문입니다.
     public var body: some View {
         NavigationStack {
             ZStack {
@@ -147,8 +175,36 @@ public struct TodoListView: View {
             .animation(.spring(response: 0.25, dampingFraction: 0.9), value: isAddTodoPopupPresented)
             .animation(.spring(response: 0.25, dampingFraction: 0.9), value: isEditTodoPopupPresented)
             .animation(.spring(response: 0.24, dampingFraction: 0.86), value: completingTodoIDs)
+            .animation(.easeInOut(duration: 0.2), value: highlightedTodoID)
+            .onReceive(notificationSelectionCenter.$selectedTodoID.compactMap { $0 }) { selectedTodoID in
+                highlightTodoForNotification(selectedTodoID)
+                notificationSelectionCenter.clearSelection()
+            }
+            .onAppear {
+                // 앱이 알림 탭으로 열렸고 이벤트가 이미 들어와 있으면 최초 진입 시에도 처리합니다.
+                if let selectedTodoID = notificationSelectionCenter.selectedTodoID {
+                    highlightTodoForNotification(selectedTodoID)
+                    notificationSelectionCenter.clearSelection()
+                }
+            }
+            .onDisappear {
+                clearHighlightedTodoTask?.cancel()
+            }
+            .alert("알림 권한이 꺼져 있어요", isPresented: $isReminderPermissionAlertPresented) {
+                Button("설정 열기") {
+                    openAppSettings()
+                }
+                Button(reminderPermissionFallbackButtonTitle) {
+                    saveWithoutReminderForAlertMode()
+                }
+                Button("취소", role: .cancel) {}
+            } message: {
+                Text("설정에서 Todo 알림을 허용하거나, 이번 항목은 알림 없이 저장할 수 있어요.")
+            }
         }
     }
+
+    // MARK: - View Sections
 
     // 배경 레이어
     private var backgroundLayer: some View {
@@ -264,6 +320,7 @@ public struct TodoListView: View {
         .accessibilityHint("완료된 할 일 목록 화면으로 이동합니다.")
     }
 
+    /// 새 TODO를 입력하는 커스텀 팝업입니다.
     private var addTodoPopup: some View {
         TodoEditorPopupView(
             title: "할 일 추가",
@@ -273,6 +330,7 @@ public struct TodoListView: View {
             text: $draftTitle,
             hasEndDate: $draftHasEndDate,
             endDate: $draftEndDate,
+            reminderOffsets: $draftReminderOffsets,
             focusBinding: $isPopupInputFocused,
             onCancel: closeAddPopup,
             onConfirm: addTodo
@@ -280,6 +338,7 @@ public struct TodoListView: View {
     }
 
     // TODO 수정 팝업
+    /// 기존 TODO를 수정하는 커스텀 팝업입니다.
     private var editTodoPopup: some View {
         TodoEditorPopupView(
             title: "할 일 수정",
@@ -289,6 +348,7 @@ public struct TodoListView: View {
             text: $editDraftTitle,
             hasEndDate: $editHasEndDate,
             endDate: $editEndDate,
+            reminderOffsets: $editReminderOffsets,
             focusBinding: $isPopupInputFocused,
             onCancel: closeEditPopup,
             onConfirm: updateTodo
@@ -320,24 +380,34 @@ public struct TodoListView: View {
             .accessibilityLabel("할 일이 없습니다. 새 할 일을 추가해보세요.")
         } else {
             // 실제 TODO 목록
-            List {
-                ForEach(viewModel.inProgressItems) { item in
-                    todoRow(item)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            if isReorderMode == false {
-                                Button(role: .destructive) {
-                                    TodoHaptics.warning()
-                                    viewModel.deleteTodo(id: item.id)
-                                } label: {
-                                    Label("삭제", systemImage: "trash")
+            ScrollViewReader { proxy in
+                List {
+                    ForEach(viewModel.inProgressItems) { item in
+                        todoRow(item)
+                            .id(item.id)
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.clear)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                if isReorderMode == false {
+                                    Button(role: .destructive) {
+                                        TodoHaptics.warning()
+                                        viewModel.deleteTodo(id: item.id)
+                                    } label: {
+                                        Label("삭제", systemImage: "trash")
+                                    }
                                 }
                             }
-                        }
+                    }
+                    // iOS 기본 이동 로직으로 순서를 변경하고 저장합니다.
+                    .onMove(perform: viewModel.moveTodos)
                 }
-                // iOS 기본 이동 로직으로 순서를 변경하고 저장합니다.
-                .onMove(perform: viewModel.moveTodos)
+                .task(id: pendingScrollTodoID) {
+                    guard let targetID = pendingScrollTodoID else { return }
+                    withAnimation(.easeInOut(duration: 0.28)) {
+                        proxy.scrollTo(targetID, anchor: .center)
+                    }
+                    pendingScrollTodoID = nil
+                }
             }
             // 정렬 핸들을 항상 노출해 바로 드래그 가능하게 합니다.
             .todoEditMode(active: isReorderMode)
@@ -351,6 +421,7 @@ public struct TodoListView: View {
     // TODO 행
     private func todoRow(_ item: TodoItemViewData) -> some View {
         let isCompleting = completingTodoIDs.contains(item.id)
+        let isHighlighted = highlightedTodoID == item.id
         let isOverdue = {
             guard let endDate = item.endDate else { return false }
             return endDate < Date()
@@ -420,6 +491,15 @@ public struct TodoListView: View {
             completeTodoWithFeedback(item)
         }
         .padding(.vertical, 7)
+        .padding(.horizontal, 4)
+        .background(
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(isHighlighted ? Color.yellow.opacity(0.2) : Color.clear)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .stroke(isHighlighted ? Color.yellow.opacity(0.55) : Color.clear, lineWidth: 1)
+                )
+        )
         // 완료 전환 중에는 축소/페이드로 "사라지는" 느낌을 줍니다.
         .scaleEffect(isCompleting ? 0.96 : 1.0)
         .opacity(isCompleting ? 0.38 : 1.0)
@@ -470,16 +550,14 @@ public struct TodoListView: View {
         .accessibilityHint("취소 버튼을 누르면 삭제를 되돌립니다.")
     }
 
+    // MARK: - Add / Edit Actions
+
     // 입력값으로 TODO 추가 + 입력창 초기화
+    /// 팝업 입력값으로 TODO 추가를 시작합니다.
     private func addTodo() {
-        let trimmed = draftTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return }
-        TodoHaptics.success()
-        viewModel.addTodo(
-            title: trimmed,
-            endDate: draftHasEndDate ? draftEndDate : nil
-        )
-        closeAddPopup()
+        Task {
+            await handleAddTodo()
+        }
     }
 
     // 팝업 상태를 공통으로 정리합니다.
@@ -487,6 +565,7 @@ public struct TodoListView: View {
         draftTitle = ""
         draftHasEndDate = false
         draftEndDate = Date()
+        draftReminderOffsets = []
         isAddTodoPopupPresented = false
         isPopupInputFocused = false
     }
@@ -498,23 +577,17 @@ public struct TodoListView: View {
         editDraftTitle = item.title
         editHasEndDate = item.endDate != nil
         editEndDate = item.endDate ?? Date()
+        editReminderOffsets = item.reminderOffsets
         isEditTodoPopupPresented = true
         isPopupInputFocused = true
     }
 
     // 수정 입력값으로 TODO 제목을 갱신합니다.
+    /// 팝업 입력값으로 TODO 수정을 시작합니다.
     private func updateTodo() {
-        let trimmed = editDraftTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard trimmed.isEmpty == false else { return }
-        guard let editingTodoID else { return }
-
-        TodoHaptics.success()
-        viewModel.updateTodo(
-            id: editingTodoID,
-            title: trimmed,
-            endDate: editHasEndDate ? editEndDate : nil
-        )
-        closeEditPopup()
+        Task {
+            await handleUpdateTodo()
+        }
     }
 
     // 수정 팝업 상태를 공통으로 정리합니다.
@@ -522,12 +595,17 @@ public struct TodoListView: View {
         editDraftTitle = ""
         editHasEndDate = false
         editEndDate = Date()
+        editReminderOffsets = []
         editingTodoID = nil
         isEditTodoPopupPresented = false
         isPopupInputFocused = false
     }
 
+    // MARK: - Completion Interaction
+
     // 진행중 TODO를 완료 처리할 때 인터랙션 효과를 먼저 노출한 뒤 상태를 전환합니다.
+    /// 진행중 TODO를 완료 처리할 때 시각/촉각 피드백을 함께 적용합니다.
+    /// - Parameter item: 완료 처리 대상 항목입니다.
     private func completeTodoWithFeedback(_ item: TodoItemViewData) {
         // 진행중 항목이 아니거나 이미 애니메이션 중이면 중복 처리를 막습니다.
         guard item.isCompleted == false else { return }
@@ -552,9 +630,138 @@ public struct TodoListView: View {
             }
         }
     }
+
+    // MARK: - Permission Handling
+
+    // 추가 동작에서 알림 권한 상태를 검사한 뒤 저장을 수행합니다.
+    @MainActor
+    private func handleAddTodo() async {
+        let trimmed = draftTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.isEmpty == false else { return }
+
+        let selectedReminderOffsets = draftHasEndDate ? draftReminderOffsets : []
+        let permissionStatus = await viewModel.reminderPermissionStatusIfNeeded(reminderOffsets: selectedReminderOffsets)
+
+        if permissionStatus == .denied, selectedReminderOffsets.isEmpty == false {
+            reminderPermissionAlertMode = .add
+            isReminderPermissionAlertPresented = true
+            return
+        }
+
+        performAddTodo(reminderOffsets: selectedReminderOffsets)
+    }
+
+    // 수정 동작에서 알림 권한 상태를 검사한 뒤 저장을 수행합니다.
+    @MainActor
+    private func handleUpdateTodo() async {
+        let trimmed = editDraftTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.isEmpty == false else { return }
+        guard editingTodoID != nil else { return }
+
+        let selectedReminderOffsets = editHasEndDate ? editReminderOffsets : []
+        let permissionStatus = await viewModel.reminderPermissionStatusIfNeeded(reminderOffsets: selectedReminderOffsets)
+
+        if permissionStatus == .denied, selectedReminderOffsets.isEmpty == false {
+            reminderPermissionAlertMode = .edit
+            isReminderPermissionAlertPresented = true
+            return
+        }
+
+        performUpdateTodo(reminderOffsets: selectedReminderOffsets)
+    }
+
+    // 추가 저장 로직(권한 검사 통과 후)을 실행합니다.
+    private func performAddTodo(reminderOffsets: [Int]) {
+        let trimmed = draftTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.isEmpty == false else { return }
+
+        TodoHaptics.success()
+        viewModel.addTodo(
+            title: trimmed,
+            endDate: draftHasEndDate ? draftEndDate : nil,
+            reminderOffsets: reminderOffsets
+        )
+        closeAddPopup()
+    }
+
+    // 수정 저장 로직(권한 검사 통과 후)을 실행합니다.
+    private func performUpdateTodo(reminderOffsets: [Int]) {
+        let trimmed = editDraftTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.isEmpty == false else { return }
+        guard let editingTodoID else { return }
+
+        TodoHaptics.success()
+        viewModel.updateTodo(
+            id: editingTodoID,
+            title: trimmed,
+            endDate: editHasEndDate ? editEndDate : nil,
+            reminderOffsets: reminderOffsets
+        )
+        closeEditPopup()
+    }
+
+    // MARK: - Alert / Settings / Notification Highlight
+
+    // 권한 거부 알럿에서 \"알림 없이 저장\"을 선택했을 때 현재 액션을 이어서 저장합니다.
+    /// 권한 거부 알럿에서 "알림 없이 저장"을 선택했을 때 현재 액션(추가/수정)을 수행합니다.
+    private func saveWithoutReminderForAlertMode() {
+        switch reminderPermissionAlertMode {
+        case .add:
+            performAddTodo(reminderOffsets: [])
+        case .edit:
+            performUpdateTodo(reminderOffsets: [])
+        }
+    }
+
+    // 알럿 모드에 맞는 \"알림 없이\" 버튼 타이틀입니다.
+    private var reminderPermissionFallbackButtonTitle: String {
+        switch reminderPermissionAlertMode {
+        case .add:
+            return "알림 없이 추가"
+        case .edit:
+            return "알림 없이 저장"
+        }
+    }
+
+    // 앱 설정 화면을 열어 사용자가 알림 권한을 직접 변경할 수 있게 합니다.
+    /// 시스템 앱 설정 화면을 엽니다.
+    private func openAppSettings() {
+        #if os(iOS)
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(url)
+        #endif
+    }
+
+    // 알림 탭으로 전달된 TODO ID를 일정 시간 강조 표시합니다.
+    /// 알림 탭으로 진입한 TODO를 강조하고 목록 중앙으로 스크롤합니다.
+    /// - Parameter todoID: 강조 대상 TODO ID입니다.
+    private func highlightTodoForNotification(_ todoID: Int) {
+        guard viewModel.inProgressItems.contains(where: { $0.id == todoID }) else { return }
+
+        clearHighlightedTodoTask?.cancel()
+        highlightedTodoID = todoID
+        pendingScrollTodoID = todoID
+
+        clearHighlightedTodoTask = Task {
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            guard Task.isCancelled == false else { return }
+            await MainActor.run {
+                if highlightedTodoID == todoID {
+                    highlightedTodoID = nil
+                }
+            }
+        }
+    }
+}
+
+// 알림 권한 안내 알럿에서 현재 동작 컨텍스트를 구분합니다.
+private enum ReminderPermissionAlertMode {
+    case add
+    case edit
 }
 
 @MainActor
+/// 메인 TODO 화면 프리뷰입니다.
 struct TodoListView_Previews: PreviewProvider {
     static var previews: some View {
         TodoListView(viewModel: makePreviewViewModel())

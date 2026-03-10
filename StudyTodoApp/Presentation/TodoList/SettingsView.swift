@@ -1,6 +1,6 @@
 import SwiftUI
 
-// 앱 동작 관련 사용자 설정 화면입니다.
+/// 앱 동작 관련 사용자 설정 화면입니다.
 public struct SettingsView: View {
     // 설정 화면을 닫을 때 사용하는 dismiss 액션입니다.
     @Environment(\.dismiss) private var dismiss
@@ -11,10 +11,13 @@ public struct SettingsView: View {
     // 데이터 삭제 확인 알럿 표시 상태입니다.
     @State private var isDeleteAllAlertPresented = false
 
+    /// 설정 화면을 생성합니다.
+    /// - Parameter viewModel: 설정 동작을 처리할 ViewModel입니다.
     public init(viewModel: TodoListViewModel) {
         self.viewModel = viewModel
     }
 
+    /// 화면 본문입니다.
     public var body: some View {
         ZStack {
             TodoTheme.backgroundGradient.ignoresSafeArea()

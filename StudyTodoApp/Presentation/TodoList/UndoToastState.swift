@@ -1,6 +1,6 @@
 import Foundation
 
-// 하단 Undo 토스트의 상태 모델입니다.
+/// 하단 Undo 토스트의 상태 모델입니다.
 public struct UndoToastState: Identifiable, Equatable {
     // SwiftUI 리스트/전환에 사용할 식별자입니다.
     public let id = UUID()
