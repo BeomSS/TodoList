@@ -1,11 +1,7 @@
-#if canImport(UIKit)
 import Foundation
 import UIKit
-#if canImport(UserNotifications)
 import UserNotifications
-#endif
 
-#if canImport(UserNotifications)
 /// 로컬 푸시 탭 이벤트를 SwiftUI 계층으로 전달하는 앱 델리게이트입니다.
 final class TodoAppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     /// 알림 델리게이트를 등록하고 앱 초기화를 완료합니다.
@@ -42,5 +38,3 @@ final class TodoAppDelegate: NSObject, UIApplicationDelegate, UNUserNotification
         completionHandler()
     }
 }
-#endif
-#endif

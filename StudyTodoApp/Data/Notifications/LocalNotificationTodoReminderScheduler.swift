@@ -1,8 +1,5 @@
 import Foundation
-
-#if canImport(UserNotifications)
 import UserNotifications
-#endif
 
 /// iOS 로컬 푸시 기반 TODO 마감 알림 스케줄러 구현입니다.
 /// 알림 식별자를 `TODO ID + 오프셋(초)`로 구성해 항목별 추가/수정/삭제 시 정확히 갱신합니다.
@@ -23,7 +20,6 @@ public struct LocalNotificationTodoReminderScheduler: TodoReminderScheduling {
         guard let endDate = item.endDate else { return }
         guard item.reminderOffsets.isEmpty == false else { return }
 
-        #if canImport(UserNotifications)
         let center = UNUserNotificationCenter.current()
         let prefix = identifierPrefix
 
@@ -44,13 +40,11 @@ public struct LocalNotificationTodoReminderScheduler: TodoReminderScheduling {
                 return
             }
         }
-        #endif
     }
 
     /// 특정 TODO ID에 연결된 예약 알림을 제거합니다.
     /// - Parameter id: 제거 대상 TODO ID입니다.
     public func removeReminders(forTodoID id: Int) {
-        #if canImport(UserNotifications)
         let center = UNUserNotificationCenter.current()
         let targetPrefix = "\(identifierPrefix).\(id)."
 
@@ -62,12 +56,10 @@ public struct LocalNotificationTodoReminderScheduler: TodoReminderScheduling {
             guard identifiers.isEmpty == false else { return }
             center.removePendingNotificationRequests(withIdentifiers: identifiers)
         }
-        #endif
     }
 
     /// 이 앱이 등록한 TODO 예약 알림을 전체 제거합니다.
     public func removeAllReminders() {
-        #if canImport(UserNotifications)
         let center = UNUserNotificationCenter.current()
         let targetPrefix = "\(identifierPrefix)."
 
@@ -79,7 +71,6 @@ public struct LocalNotificationTodoReminderScheduler: TodoReminderScheduling {
             guard identifiers.isEmpty == false else { return }
             center.removePendingNotificationRequests(withIdentifiers: identifiers)
         }
-        #endif
     }
 
     // TODO ID/알림 오프셋 조합으로 고유 알림 ID를 만듭니다.
@@ -87,7 +78,6 @@ public struct LocalNotificationTodoReminderScheduler: TodoReminderScheduling {
         "\(prefix).\(todoID).\(offset)"
     }
 
-    #if canImport(UserNotifications)
     // 실제 알림 요청 생성/등록을 수행합니다.
     private static func scheduleRequests(
         center: UNUserNotificationCenter,
@@ -122,5 +112,4 @@ public struct LocalNotificationTodoReminderScheduler: TodoReminderScheduling {
             center.add(request)
         }
     }
-    #endif
 }

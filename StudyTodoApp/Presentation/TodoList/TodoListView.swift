@@ -1,7 +1,5 @@
 import SwiftUI
-#if canImport(UIKit)
 import UIKit
-#endif
 
 /// 진행 중 TODO를 관리하는 메인 화면입니다.
 public struct TodoListView: View {
@@ -130,7 +128,6 @@ public struct TodoListView: View {
                     .accessibilityLabel("Todo, 오늘 할 일")
                 }
 
-                #if os(iOS)
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink {
                         SettingsView(viewModel: viewModel)
@@ -149,26 +146,6 @@ public struct TodoListView: View {
                     .todoRoundedFontDesign()
                     .accessibilityLabel(isReorderMode ? "정렬 모드 종료" : "정렬 모드 시작")
                 }
-                #else
-                ToolbarItem(placement: .navigation) {
-                    NavigationLink {
-                        SettingsView(viewModel: viewModel)
-                    } label: {
-                        Image(systemName: "gearshape")
-                    }
-                    .accessibilityLabel("설정")
-                }
-
-                ToolbarItem(placement: .primaryAction) {
-                    Button(isReorderMode ? "완료" : "정렬") {
-                        TodoHaptics.selection()
-                        isReorderMode.toggle()
-                    }
-                    .font(.subheadline.weight(.bold))
-                    .todoRoundedFontDesign()
-                    .accessibilityLabel(isReorderMode ? "정렬 모드 종료" : "정렬 모드 시작")
-                }
-                #endif
             }
             // 토스트 표시/숨김 애니메이션
             .animation(.spring(response: 0.28, dampingFraction: 0.92), value: viewModel.undoToast)
@@ -615,10 +592,8 @@ public struct TodoListView: View {
             completingTodoIDs.insert(item.id)
         }
 
-        #if os(iOS)
         // 완료 시점 촉각 피드백으로 인터랙션 감각을 강화합니다.
         TodoHaptics.lightImpact()
-        #endif
 
         Task {
             // 짧은 지연으로 시각 효과를 먼저 보여준 뒤 실제 완료 상태를 반영합니다.
@@ -726,10 +701,8 @@ public struct TodoListView: View {
     // 앱 설정 화면을 열어 사용자가 알림 권한을 직접 변경할 수 있게 합니다.
     /// 시스템 앱 설정 화면을 엽니다.
     private func openAppSettings() {
-        #if os(iOS)
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
         UIApplication.shared.open(url)
-        #endif
     }
 
     // 알림 탭으로 전달된 TODO ID를 일정 시간 강조 표시합니다.

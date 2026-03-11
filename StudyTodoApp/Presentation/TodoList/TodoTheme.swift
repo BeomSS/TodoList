@@ -1,7 +1,5 @@
 import SwiftUI
-#if canImport(UIKit)
 import UIKit
-#endif
 
 /// Todo 화면군에서 공통으로 쓰는 색상/배경 스타일 모음입니다.
 enum TodoTheme {
@@ -21,19 +19,11 @@ enum TodoTheme {
 
     /// 팝업 취소 버튼 배경 색상입니다.
     static var popupCancelBackgroundColor: Color {
-        #if os(iOS)
         return Color(uiColor: .systemGray5)
-        #else
-        return Color.gray.opacity(0.2)
-        #endif
     }
 
     /// 팝업 입력창 배경 색상입니다.
     static var popupInputBackgroundColor: Color {
-        #if os(iOS)
         return Color(uiColor: .systemGray6)
-        #else
-        return Color.gray.opacity(0.14)
-        #endif
     }
 }

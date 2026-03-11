@@ -1,8 +1,5 @@
 import Foundation
-
-#if canImport(UserNotifications)
 import UserNotifications
-#endif
 
 /// iOS 로컬 알림 권한 상태를 조회하는 구현체입니다.
 public struct LocalNotificationPermissionChecker: TodoReminderPermissionChecking {
@@ -12,7 +9,6 @@ public struct LocalNotificationPermissionChecker: TodoReminderPermissionChecking
     /// - Returns: 도메인 레벨 권한 상태(`authorized`/`notDetermined`/`denied`)입니다.
     @MainActor
     public func currentStatus() async -> TodoReminderPermissionStatus {
-        #if canImport(UserNotifications)
         // 시스템 알림 센터의 현재 권한 상태를 조회합니다.
         let center = UNUserNotificationCenter.current()
 
@@ -36,9 +32,5 @@ public struct LocalNotificationPermissionChecker: TodoReminderPermissionChecking
                 continuation.resume(returning: status)
             }
         }
-        #else
-        // UserNotifications를 지원하지 않는 플랫폼에서는 권한 제한을 두지 않습니다.
-        return .authorized
-        #endif
     }
 }

@@ -1,7 +1,5 @@
 import Foundation
-#if canImport(WidgetKit)
 import WidgetKit
-#endif
 
 /// 메인 앱에서 위젯용 스냅샷을 UserDefaults(App Group)에 저장하는 저장소입니다.
 struct TodayTodoWidgetSnapshotStore: TodayTodoWidgetSnapshotWriting {
@@ -60,8 +58,6 @@ struct TodayTodoWidgetSnapshotStore: TodayTodoWidgetSnapshotWriting {
         defaults.set(encoded, forKey: AppGroupConfig.todaySnapshotKey)
 
         // 앱에서 데이터가 바뀌면 오늘 위젯을 즉시 재요청해 반영 지연을 줄입니다.
-        #if canImport(WidgetKit)
         WidgetCenter.shared.reloadTimelines(ofKind: TodayTodoWidgetConfig.kind)
-        #endif
     }
 }

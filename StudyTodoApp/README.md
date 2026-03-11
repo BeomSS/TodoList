@@ -57,9 +57,13 @@ StudyTodoApp/
 TodayTodoWidget/
   TodayTodoWidget.swift
   TodayTodoEntry.swift
+  TodayTodoEntryItem.swift
   TodayTodoProvider.swift
   TodayTodoWidgetView.swift
-  TodayTodoWidgetComponents.swift
+  TodayTodoWidgetHeaderView.swift
+  TodayTodoWidgetEmptyStateView.swift
+  TodayTodoWidgetItemRowView.swift
+  TodayWidgetBackgroundModifier.swift
 StudyTodoAppTests/
   TodoListViewModelTests.swift
 ```

@@ -1,4 +1,3 @@
-#if canImport(UIKit)
 import SwiftUI
 
 /// 앱 실행 진입점입니다.
@@ -17,4 +16,3 @@ struct StudyTodoApp: App {
         }
     }
 }
-#endif
