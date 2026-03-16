@@ -8,6 +8,8 @@ public struct SettingsView: View {
     @ObservedObject private var viewModel: TodoListViewModel
     // 완료 화면 되돌리기 확인 팝업 생략 여부입니다.
     @AppStorage(TodoAppStorageKey.restoreAlwaysAllow) private var restoreAlwaysAllowed = false
+    // Siri 가이드 1회 노출 여부입니다.
+    @AppStorage(TodoAppStorageKey.hasShownSiriAddGuide) private var hasShownSiriAddGuide = false
     // 데이터 삭제 확인 알럿 표시 상태입니다.
     @State private var isDeleteAllAlertPresented = false
 
@@ -30,7 +32,7 @@ public struct SettingsView: View {
                     // 사용자가 언제든 기본 동작(확인 팝업 표시)으로 복원할 수 있습니다.
                     Button("설정값을 기본값으로 되돌리기") {
                         TodoHaptics.selection()
-                        restoreAlwaysAllowed = false
+                        resetUserGuidePreferences()
                     }
                     .buttonStyle(TodoPressableButtonStyle())
                 }
@@ -54,12 +56,24 @@ public struct SettingsView: View {
             Button("삭제", role: .destructive) {
                 TodoHaptics.success()
                 viewModel.clearAllAppData()
-                restoreAlwaysAllowed = false
+                // 앱 데이터 전체 초기화 의미에 맞춰 1회성 가이드/설정 플래그도 함께 리셋합니다.
+                resetUserGuidePreferences()
                 // 삭제 완료 후 설정 화면을 닫아 메인(빈 목록)으로 자연스럽게 복귀합니다.
                 dismiss()
             }
         } message: {
             Text("진행중/완료 목록이 모두 삭제되며 되돌릴 수 없습니다.")
+        }
+    }
+
+    // 사용자 가이드/팝업 관련 환경설정을 기본 상태로 되돌립니다.
+    // 신규 1회성 가이드 키가 추가되면 `TodoAppStorageKey.oneTimeGuideKeys`에만 등록하면 함께 초기화됩니다.
+    private func resetUserGuidePreferences() {
+        restoreAlwaysAllowed = false
+        hasShownSiriAddGuide = false
+
+        for key in TodoAppStorageKey.oneTimeGuideKeys {
+            UserDefaults.standard.removeObject(forKey: key)
         }
     }
 }

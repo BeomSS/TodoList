@@ -37,6 +37,12 @@ public struct TodoListView: View {
     @State private var isReorderMode = false
     // 완료 처리 애니메이션이 진행 중인 TODO ID 집합입니다.
     @State private var completingTodoIDs: Set<Int> = []
+    // Siri 사용 가이드 팝업 노출 상태입니다.
+    @State private var isSiriGuidePopupPresented = false
+    // Siri 사용 가이드 자동 표시 예약 작업입니다.
+    @State private var presentSiriGuideTask: Task<Void, Never>?
+    // Siri 사용 가이드를 1회만 노출하기 위한 영구 플래그입니다.
+    @AppStorage(TodoAppStorageKey.hasShownSiriAddGuide) private var hasShownSiriAddGuide = false
     @FocusState private var isPopupInputFocused: Bool
 
     // MARK: - Init
@@ -112,6 +118,12 @@ public struct TodoListView: View {
                         .transition(.opacity.combined(with: .scale(scale: 0.96)))
                 }
             }
+            .overlay {
+                if isSiriGuidePopupPresented {
+                    siriGuidePopup
+                        .transition(.opacity.combined(with: .scale(scale: 0.96)))
+                }
+            }
             .todoNavigationBarInline()
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -151,6 +163,7 @@ public struct TodoListView: View {
             .animation(.spring(response: 0.28, dampingFraction: 0.92), value: viewModel.undoToast)
             .animation(.spring(response: 0.25, dampingFraction: 0.9), value: isAddTodoPopupPresented)
             .animation(.spring(response: 0.25, dampingFraction: 0.9), value: isEditTodoPopupPresented)
+            .animation(.spring(response: 0.26, dampingFraction: 0.9), value: isSiriGuidePopupPresented)
             .animation(.spring(response: 0.24, dampingFraction: 0.86), value: completingTodoIDs)
             .animation(.easeInOut(duration: 0.2), value: highlightedTodoID)
             .onReceive(notificationSelectionCenter.$selectedTodoID.compactMap { $0 }) { selectedTodoID in
@@ -166,6 +179,7 @@ public struct TodoListView: View {
             }
             .onDisappear {
                 clearHighlightedTodoTask?.cancel()
+                presentSiriGuideTask?.cancel()
             }
             .alert("알림 권한이 꺼져 있어요", isPresented: $isReminderPermissionAlertPresented) {
                 Button("설정 열기") {
@@ -332,6 +346,87 @@ public struct TodoListView: View {
         )
     }
 
+    /// Siri 음성 추가 기능을 안내하는 1회성 커스텀 팝업입니다.
+    private var siriGuidePopup: some View {
+        ZStack {
+            // 배경을 살짝 어둡게 처리해 팝업에 시선을 모읍니다.
+            Color.black.opacity(0.08)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    dismissSiriGuidePopup()
+                }
+
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(spacing: 10) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.orange.opacity(0.18))
+                            .frame(width: 34, height: 34)
+
+                        Image(systemName: "waveform.badge.mic")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundStyle(.orange)
+                    }
+
+                    Text("Siri로도 추가할 수 있어요")
+                        .font(.headline.weight(.bold))
+                        .todoRoundedFontDesign()
+
+                    Spacer()
+                }
+
+                Text("예시")
+                    .font(.subheadline.weight(.bold))
+                    .todoRoundedFontDesign()
+                    .foregroundStyle(.secondary)
+
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("• \"시리야, Todo에서 우유 사기 추가해줘\"")
+                    Text("• \"시리야, Todo에서 빨래 하기 오늘 3시까지로 추가해줘\"")
+                    Text("• \"시리야, Todo에서 이불빨래 하기 3월 18일 오후 6시까지로 추가해줘\"")
+                }
+                .font(.footnote.weight(.semibold))
+                .todoRoundedFontDesign()
+                .foregroundStyle(.primary)
+                .lineSpacing(2)
+
+                Button {
+                    dismissSiriGuidePopup()
+                } label: {
+                    Text("확인")
+                        .font(.subheadline.weight(.bold))
+                        .todoRoundedFontDesign()
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 11)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .fill(Color.blue)
+                        )
+                }
+                .buttonStyle(TodoPressableButtonStyle())
+                .accessibilityLabel("Siri 사용 가이드 닫기")
+            }
+            .padding(18)
+            .frame(maxWidth: 360)
+            // 머티리얼 대신 밝은 고정 배경을 사용해 딤 위에서도 텍스트 대비를 유지합니다.
+            .background(
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .fill(Color.white.opacity(0.98))
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .stroke(Color.black.opacity(0.06), lineWidth: 1)
+            )
+            .shadow(color: .black.opacity(0.16), radius: 16, x: 0, y: 8)
+            .padding(.horizontal, 20)
+            .zIndex(1)
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("Siri 할 일 추가 안내")
+        }
+    }
+
     // 목록 영역
     @ViewBuilder
     private var listCard: some View {
@@ -350,6 +445,13 @@ public struct TodoListView: View {
                     .font(.footnote.weight(.medium))
                     .todoRoundedFontDesign()
                     .foregroundStyle(.secondary)
+
+                Text("시리로도 추가할 수 있어요.\n\"시리야, Todo에서 우유 사기 추가해줘\"")
+                    .font(.caption.weight(.semibold))
+                    .todoRoundedFontDesign()
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 2)
             }
             .frame(maxWidth: .infinity, minHeight: 220)
             .todoCardStyle()
@@ -657,6 +759,7 @@ public struct TodoListView: View {
             reminderOffsets: reminderOffsets
         )
         closeAddPopup()
+        scheduleSiriGuideIfNeeded()
     }
 
     // 수정 저장 로직(권한 검사 통과 후)을 실행합니다.
@@ -703,6 +806,33 @@ public struct TodoListView: View {
     private func openAppSettings() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
         UIApplication.shared.open(url)
+    }
+
+    // 첫 TODO 추가 이후 Siri 가이드를 1초 뒤 1회만 표시합니다.
+    private func scheduleSiriGuideIfNeeded() {
+        guard hasShownSiriAddGuide == false else { return }
+        guard isSiriGuidePopupPresented == false else { return }
+
+        // 중복 예약을 막기 위해 이전 작업을 취소하고 새로 예약합니다.
+        presentSiriGuideTask?.cancel()
+        hasShownSiriAddGuide = true
+
+        presentSiriGuideTask = Task {
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            guard Task.isCancelled == false else { return }
+            await MainActor.run {
+                withAnimation(.spring(response: 0.26, dampingFraction: 0.9)) {
+                    isSiriGuidePopupPresented = true
+                }
+            }
+        }
+    }
+
+    // Siri 안내 팝업을 닫습니다.
+    private func dismissSiriGuidePopup() {
+        withAnimation(.easeOut(duration: 0.2)) {
+            isSiriGuidePopupPresented = false
+        }
     }
 
     // 알림 탭으로 전달된 TODO ID를 일정 시간 강조 표시합니다.
