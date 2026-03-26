@@ -10,7 +10,8 @@ SwiftUI + MVVM 기반의 로컬 TODO 앱입니다.
 - `App`: 앱 진입점과 의존성 조립
 - `Presentation/TodoList`: View, ViewModel
 - `Domain/Todo`: 서비스/UseCase(비즈니스 로직)
-- `Data/Persistence`: 저장소(CoreData 구현)
+- `Data`: 저장소/알림/위젯 스냅샷/분석 구현
+- `Shared`: 앱-위젯 공유 모델/설정
 - `StudyTodoAppTests`: ViewModel/Service/UseCase 테스트
 
 ## 폴더 구조
@@ -21,6 +22,7 @@ StudyTodoApp/
     StudyTodoApp.swift
     AppDIContainer.swift
     TodoAppDelegate.swift
+    TodoNotificationSelectionCenter.swift
   Domain/
     Todo/
       FetchTodoListUseCase.swift
@@ -39,6 +41,14 @@ StudyTodoApp/
       TodoStore.swift
       InMemoryTodoStore.swift
       CoreDataTodoStore.swift
+    Notifications/
+      LocalNotificationPermissionChecker.swift
+      LocalNotificationTodoReminderScheduler.swift
+    Widget/
+      TodayTodoWidgetSnapshotWriting.swift
+      TodayTodoWidgetSnapshotStore.swift
+    Analytics/
+      TodoEventLoggerPublisher.swift
   Presentation/
     TodoList/
       TodoItemViewData.swift
@@ -49,6 +59,7 @@ StudyTodoApp/
       TodoTheme.swift
       TodoReminderOption.swift
       View+TodoModifiers.swift
+      SettingsView.swift
   Shared/
     AppGroupConfig.swift
     TodayTodoWidgetConfig.swift
