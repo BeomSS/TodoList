@@ -48,7 +48,7 @@
 		A4E94B7AD78E4FC2278D5CA0 /* TodayWidgetBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B66E58E42E61020FF7DF6C1 /* TodayWidgetBackgroundModifier.swift */; };
 		AB0397BFA83217CDCC3C088B /* DefaultDeleteTodoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19C83F83CFD1E6BD40ADC7 /* DefaultDeleteTodoUseCase.swift */; };
 		B00000000000000000000031 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000011 /* AppDIContainer.swift */; };
-		B00000000000000000000032 /* StudyTodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* StudyTodoApp.swift */; };
+		B00000000000000000000032 /* TodoDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* TodoDo.swift */; };
 		B0000000000000000000003B /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001B /* TodoListView.swift */; };
 		B0000000000000000000003C /* TodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001C /* TodoListViewModel.swift */; };
 		B0000000000000000000003E /* TodoListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001E /* TodoListViewModelTests.swift */; };
@@ -100,7 +100,7 @@
 			containerPortal = B00000000000000000000001 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B00000000000000000000004;
-			remoteInfo = StudyTodoApp;
+			remoteInfo = TodoDo;
 		};
 		B00000000000000000000131 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -165,10 +165,10 @@
 		9A66F371C03F35159CB333C8 /* SharedTodayTodoWidgetSnapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedTodayTodoWidgetSnapshot.swift; sourceTree = "<group>"; };
 		9B01D7D38C2E780CAC8D3430 /* FetchTodoListUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FetchTodoListUseCase.swift; sourceTree = "<group>"; };
 		AEA6B1CD7B45405C9260CE01 /* View+TodoModifiers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "View+TodoModifiers.swift"; sourceTree = "<group>"; };
-		B00000000000000000000002 /* StudyTodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyTodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B00000000000000000000003 /* StudyTodoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyTodoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000002 /* TodoDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000003 /* TodoDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00000000000000000000011 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
-		B00000000000000000000012 /* StudyTodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTodoApp.swift; sourceTree = "<group>"; };
+		B00000000000000000000012 /* TodoDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDo.swift; sourceTree = "<group>"; };
 		B0000000000000000000001B /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
 		B0000000000000000000001C /* TodoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModel.swift; sourceTree = "<group>"; };
 		B0000000000000000000001E /* TodoListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModelTests.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 		B00000000000000000000125 /* TodayTodoWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTodoWidgetBundle.swift; sourceTree = "<group>"; };
 		B00000000000000000000126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B00000000000000000000127 /* TodayTodoWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayTodoWidget.entitlements; sourceTree = "<group>"; };
-		B00000000000000000000128 /* StudyTodoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyTodoApp.entitlements; sourceTree = "<group>"; };
+		B00000000000000000000128 /* TodoDo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoDo.entitlements; sourceTree = "<group>"; };
 		B0000000000000000000013E /* LocalNotificationPermissionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationPermissionChecker.swift; sourceTree = "<group>"; };
 		B00000000000000000000140 /* TodoNotificationSelectionCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNotificationSelectionCenter.swift; sourceTree = "<group>"; };
 		B26D72B57B2D5AC92821E735 /* TodoServiceType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoServiceType.swift; sourceTree = "<group>"; };
@@ -245,21 +245,20 @@
 			children = (
 				71AAEF309C8958F313A4CC66 /* TodoEventLoggerPublisher.swift */,
 			);
-			name = Analytics;
 			path = Analytics;
 			sourceTree = "<group>";
 		};
 		B00000000000000000000071 = {
 			isa = PBXGroup;
 			children = (
-				B00000000000000000000072 /* StudyTodoApp */,
+				B00000000000000000000072 /* TodoDo */,
 				B00000000000000000000123 /* TodayTodoWidget */,
-				B00000000000000000000073 /* StudyTodoAppTests */,
+				B00000000000000000000073 /* TodoDoTests */,
 				B00000000000000000000074 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		B00000000000000000000072 /* StudyTodoApp */ = {
+		B00000000000000000000072 /* TodoDo */ = {
 			isa = PBXGroup;
 			children = (
 				B000000000000000000000E2 /* Assets.xcassets */,
@@ -271,22 +270,22 @@
 				B00000000000000000000078 /* Presentation */,
 				B00000000000000000000079 /* README.md */,
 			);
-			path = StudyTodoApp;
+			path = TodoDo;
 			sourceTree = "<group>";
 		};
-		B00000000000000000000073 /* StudyTodoAppTests */ = {
+		B00000000000000000000073 /* TodoDoTests */ = {
 			isa = PBXGroup;
 			children = (
 				B0000000000000000000001E /* TodoListViewModelTests.swift */,
 			);
-			path = StudyTodoAppTests;
+			path = TodoDoTests;
 			sourceTree = "<group>";
 		};
 		B00000000000000000000074 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B00000000000000000000002 /* StudyTodoApp.app */,
-				B00000000000000000000003 /* StudyTodoAppTests.xctest */,
+				B00000000000000000000002 /* TodoDo.app */,
+				B00000000000000000000003 /* TodoDoTests.xctest */,
 				B00000000000000000000120 /* TodayTodoWidget.appex */,
 			);
 			name = Products;
@@ -297,7 +296,7 @@
 			children = (
 				B00000000000000000000011 /* AppDIContainer.swift */,
 				B00000000000000000000140 /* TodoNotificationSelectionCenter.swift */,
-				B00000000000000000000012 /* StudyTodoApp.swift */,
+				B00000000000000000000012 /* TodoDo.swift */,
 				C87F5FBB8475551B09686C19 /* TodoAppDelegate.swift */,
 			);
 			path = App;
@@ -457,7 +456,7 @@
 		B00000000000000000000137 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				B00000000000000000000128 /* StudyTodoApp.entitlements */,
+				B00000000000000000000128 /* TodoDo.entitlements */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -465,9 +464,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B00000000000000000000004 /* StudyTodoApp */ = {
+		B00000000000000000000004 /* TodoDo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B00000000000000000000094 /* Build configuration list for PBXNativeTarget "StudyTodoApp" */;
+			buildConfigurationList = B00000000000000000000094 /* Build configuration list for PBXNativeTarget "TodoDo" */;
 			buildPhases = (
 				B00000000000000000000091 /* Sources */,
 				B00000000000000000000061 /* Frameworks */,
@@ -479,14 +478,14 @@
 			dependencies = (
 				B00000000000000000000132 /* PBXTargetDependency */,
 			);
-			name = StudyTodoApp;
-			productName = StudyTodoApp;
-			productReference = B00000000000000000000002 /* StudyTodoApp.app */;
+			name = TodoDo;
+			productName = TodoDo;
+			productReference = B00000000000000000000002 /* TodoDo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B00000000000000000000005 /* StudyTodoAppTests */ = {
+		B00000000000000000000005 /* TodoDoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B00000000000000000000095 /* Build configuration list for PBXNativeTarget "StudyTodoAppTests" */;
+			buildConfigurationList = B00000000000000000000095 /* Build configuration list for PBXNativeTarget "TodoDoTests" */;
 			buildPhases = (
 				B00000000000000000000093 /* Sources */,
 				B00000000000000000000062 /* Frameworks */,
@@ -497,9 +496,9 @@
 			dependencies = (
 				B00000000000000000000097 /* PBXTargetDependency */,
 			);
-			name = StudyTodoAppTests;
-			productName = StudyTodoAppTests;
-			productReference = B00000000000000000000003 /* StudyTodoAppTests.xctest */;
+			name = TodoDoTests;
+			productName = TodoDoTests;
+			productReference = B00000000000000000000003 /* TodoDoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		B00000000000000000000130 /* TodayTodoWidget */ = {
@@ -541,7 +540,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B00000000000000000000098 /* Build configuration list for PBXProject "StudyTodoApp" */;
+			buildConfigurationList = B00000000000000000000098 /* Build configuration list for PBXProject "TodoDo" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -554,8 +553,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B00000000000000000000004 /* StudyTodoApp */,
-				B00000000000000000000005 /* StudyTodoAppTests */,
+				B00000000000000000000004 /* TodoDo */,
+				B00000000000000000000005 /* TodoDoTests */,
 				B00000000000000000000130 /* TodayTodoWidget */,
 			);
 		};
@@ -592,7 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B00000000000000000000031 /* AppDIContainer.swift in Sources */,
-				B00000000000000000000032 /* StudyTodoApp.swift in Sources */,
+				B00000000000000000000032 /* TodoDo.swift in Sources */,
 				B0000000000000000000003B /* TodoListView.swift in Sources */,
 				B0000000000000000000003C /* TodoListViewModel.swift in Sources */,
 				B00000000000000000000104 /* TodoItemViewData.swift in Sources */,
@@ -696,7 +695,7 @@
 /* Begin PBXTargetDependency section */
 		B00000000000000000000097 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B00000000000000000000004 /* StudyTodoApp */;
+			target = B00000000000000000000004 /* TodoDo */;
 			targetProxy = B00000000000000000000050 /* PBXContainerItemProxy */;
 		};
 		B00000000000000000000132 /* PBXTargetDependency */ = {
@@ -778,12 +777,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = StudyTodoApp/Supporting/StudyTodoApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TodoDo/Supporting/TodoDo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BUQ8UP3ZV9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Todo;
+				INFOPLIST_KEY_CFBundleDisplayName = "투두두";
+				INFOPLIST_KEY_CFBundleSpokenName = "투두두";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -808,12 +808,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = StudyTodoApp/Supporting/StudyTodoApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TodoDo/Supporting/TodoDo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BUQ8UP3ZV9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Todo;
+				INFOPLIST_KEY_CFBundleDisplayName = "투두두";
+				INFOPLIST_KEY_CFBundleSpokenName = "투두두";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -843,13 +844,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.StudyTodoAppTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.TodoDoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudyTodoApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StudyTodoApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TodoDo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TodoDo";
 			};
 			name = Debug;
 		};
@@ -863,13 +864,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.StudyTodoAppTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.TodoDoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudyTodoApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StudyTodoApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TodoDo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TodoDo";
 			};
 			name = Release;
 		};
@@ -930,7 +931,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B00000000000000000000094 /* Build configuration list for PBXNativeTarget "StudyTodoApp" */ = {
+		B00000000000000000000094 /* Build configuration list for PBXNativeTarget "TodoDo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B000000000000000000000B1 /* Debug */,
@@ -939,7 +940,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B00000000000000000000095 /* Build configuration list for PBXNativeTarget "StudyTodoAppTests" */ = {
+		B00000000000000000000095 /* Build configuration list for PBXNativeTarget "TodoDoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B000000000000000000000C1 /* Debug */,
@@ -948,7 +949,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B00000000000000000000098 /* Build configuration list for PBXProject "StudyTodoApp" */ = {
+		B00000000000000000000098 /* Build configuration list for PBXProject "TodoDo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B000000000000000000000A1 /* Debug */,

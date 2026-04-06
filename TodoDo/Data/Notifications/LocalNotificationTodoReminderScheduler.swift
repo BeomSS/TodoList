@@ -91,7 +91,7 @@ public struct LocalNotificationTodoReminderScheduler: TodoReminderScheduling {
             guard triggerDate > Date() else { continue }
 
             let content = UNMutableNotificationContent()
-            content.title = "Todo 알림"
+            content.title = "투두두 알림"
             content.body = "\(item.title) 마감이 다가옵니다."
             content.sound = .default
             // 알림 탭 시 해당 TODO를 식별할 수 있도록 userInfo에 ID를 포함합니다.

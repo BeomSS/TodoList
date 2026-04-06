@@ -28,7 +28,7 @@
 ## Test Template
 ```swift
 import XCTest
-@testable import StudyTodoApp
+@testable import TodoDo
 
 final class FeatureNameTests: XCTestCase {
     // GIVEN: 테스트 준비

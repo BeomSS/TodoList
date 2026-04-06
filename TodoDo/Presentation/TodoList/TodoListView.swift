@@ -128,7 +128,7 @@ public struct TodoListView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     VStack(spacing: 2) {
-                        Text("Todo")
+                        Text("투두두")
                             .font(.title3.weight(.bold))
                             .todoRoundedFontDesign()
                         Text("오늘 할 일")
@@ -137,7 +137,7 @@ public struct TodoListView: View {
                             .foregroundStyle(.secondary)
                     }
                     .accessibilityElement(children: .combine)
-                    .accessibilityLabel("Todo, 오늘 할 일")
+                    .accessibilityLabel("투두두, 오늘 할 일")
                 }
 
                 ToolbarItem(placement: .topBarLeading) {
@@ -190,7 +190,7 @@ public struct TodoListView: View {
                 }
                 Button("취소", role: .cancel) {}
             } message: {
-                Text("설정에서 Todo 알림을 허용하거나, 이번 항목은 알림 없이 저장할 수 있어요.")
+                Text("설정에서 투두두 알림을 허용하거나, 이번 항목은 알림 없이 저장할 수 있어요.")
             }
         }
     }
@@ -206,7 +206,7 @@ public struct TodoListView: View {
     private var headerCard: some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
-                Text("Todo")
+                Text("투두두")
                     .font(.subheadline.weight(.semibold))
                     .todoRoundedFontDesign()
                     .foregroundStyle(.secondary)
@@ -381,9 +381,9 @@ public struct TodoListView: View {
                     .foregroundStyle(.secondary)
 
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("• \"시리야, Todo에서 우유 사기 추가해줘\"")
-                    Text("• \"시리야, Todo에서 빨래 하기 오늘 3시까지로 추가해줘\"")
-                    Text("• \"시리야, Todo에서 이불빨래 하기 3월 18일 오후 6시까지로 추가해줘\"")
+                    Text("• \"시리야, 투두두에서 우유 사기 추가해줘\"")
+                    Text("• \"시리야, 투두두에서 빨래 하기 오늘 3시까지로 추가해줘\"")
+                    Text("• \"시리야, 투두두에서 이불빨래 하기 3월 18일 오후 6시까지로 추가해줘\"")
                 }
                 .font(.footnote.weight(.semibold))
                 .todoRoundedFontDesign()
@@ -446,7 +446,7 @@ public struct TodoListView: View {
                     .todoRoundedFontDesign()
                     .foregroundStyle(.secondary)
 
-                Text("시리로도 추가할 수 있어요.\n\"시리야, Todo에서 우유 사기 추가해줘\"")
+                Text("시리로도 추가할 수 있어요.\n\"시리야, 투두두에서 우유 사기 추가해줘\"")
                     .font(.caption.weight(.semibold))
                     .todoRoundedFontDesign()
                     .foregroundStyle(.secondary)

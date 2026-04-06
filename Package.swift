@@ -2,23 +2,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "StudyTodoApp",
+    name: "TodoDo",
     platforms: [
         .iOS(.v16)
     ],
     products: [
-        .library(name: "StudyTodoApp", targets: ["StudyTodoApp"])
+        .library(name: "TodoDo", targets: ["TodoDo"])
     ],
     targets: [
         .target(
-            name: "StudyTodoApp",
-            path: "StudyTodoApp",
+            name: "TodoDo",
+            path: "TodoDo",
             exclude: ["Assets.xcassets", "README.md", "Docs", "Supporting"]
         ),
         .testTarget(
-            name: "StudyTodoAppTests",
-            dependencies: ["StudyTodoApp"],
-            path: "StudyTodoAppTests"
+            name: "TodoDoTests",
+            dependencies: ["TodoDo"],
+            path: "TodoDoTests"
         )
     ]
 )

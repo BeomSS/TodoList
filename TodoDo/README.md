@@ -1,4 +1,4 @@
-# Todo
+# 투두두
 
 SwiftUI + MVVM 기반의 로컬 TODO 앱입니다.
 저장소는 `CoreData`를 사용합니다.
@@ -12,14 +12,14 @@ SwiftUI + MVVM 기반의 로컬 TODO 앱입니다.
 - `Domain/Todo`: 서비스/UseCase(비즈니스 로직)
 - `Data`: 저장소/알림/위젯 스냅샷/분석 구현
 - `Shared`: 앱-위젯 공유 모델/설정
-- `StudyTodoAppTests`: ViewModel/Service/UseCase 테스트
+- `TodoDoTests`: ViewModel/Service/UseCase 테스트
 
 ## 폴더 구조
 
 ```text
-StudyTodoApp/
+TodoDo/
   App/
-    StudyTodoApp.swift
+    TodoDo.swift
     AppDIContainer.swift
     TodoAppDelegate.swift
     TodoNotificationSelectionCenter.swift
@@ -75,7 +75,7 @@ TodayTodoWidget/
   TodayTodoWidgetEmptyStateView.swift
   TodayTodoWidgetItemRowView.swift
   TodayWidgetBackgroundModifier.swift
-StudyTodoAppTests/
+TodoDoTests/
   TodoListViewModelTests.swift
 ```
 
@@ -99,13 +99,13 @@ StudyTodoAppTests/
 - VoiceOver/Dynamic Type 대응 접근성 개선
 
 ## Siri 사용 예시
-- "시리야. Todo에서 우유 사기 추가해줘."
-- "시리야. Todo에서 빨래 하기 오늘 3시까지로 추가해줘."
-- "시리야. Todo에서 이불빨래 하기 3월 18일 오후 6시까지로 추가해줘."
+- "시리야. 투두두에서 우유 사기 추가해줘."
+- "시리야. 투두두에서 빨래 하기 오늘 3시까지로 추가해줘."
+- "시리야. 투두두에서 이불빨래 하기 3월 18일 오후 6시까지로 추가해줘."
 
 앱은 발화 텍스트에서 날짜를 자동 인식해 마감일로 저장하고, 날짜를 제외한 나머지 문장을 제목으로 저장합니다.
 
 ## 실행 방법
-1. `/Users/kimkyeongbeom/Desktop/testprjt/StudyTodoApp.xcodeproj`를 엽니다.
+1. `/Users/kimkyeongbeom/Desktop/testprjt/TodoDo.xcodeproj`를 엽니다.
 2. iOS 16+ 시뮬레이터를 선택합니다.
-3. `StudyTodoApp` 스킴으로 실행합니다.
+3. `TodoDo` 스킴으로 실행합니다.

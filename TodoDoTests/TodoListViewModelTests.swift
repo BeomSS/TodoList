@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-@testable import StudyTodoApp
+@testable import TodoDo
 
 /// TODO 메인 ViewModel 동작을 검증하는 테스트 집합입니다.
 @MainActor

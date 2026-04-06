@@ -3,7 +3,7 @@ import SwiftUI
 
 /// 앱 실행 진입점입니다.
 @main
-struct StudyTodoApp: App {
+struct TodoDo: App {
     // 앱 전체에서 사용할 의존성 조립 객체입니다.
     private let container = AppDIContainer.shared
     // 알림 탭 이벤트를 처리하기 위한 UIApplicationDelegate 어댑터입니다.
@@ -24,7 +24,7 @@ struct StudyTodoApp: App {
 }
 
 /// Siri/단축어에서 TODO를 추가하는 앱 인텐트입니다.
-/// 음성 예시: "시리야, Todo에서 우유 사기 추가해줘"
+/// 음성 예시: "시리야, 투두두에서 우유 사기 추가해줘"
 struct AddTodoFromVoiceIntent: AppIntent {
     /// 인텐트 이름입니다.
     static let title: LocalizedStringResource = "할 일 추가"
@@ -80,10 +80,15 @@ struct TodoAppShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: AddTodoFromVoiceIntent(),
             phrases: [
-                // 제목만 추가하는 기본 문구입니다.
-                "\(.applicationName)에서 \(\.$todoPhrase) 추가해줘",
-                // 영어 발화 대응 문구도 함께 제공합니다.
-                "Add \(\.$todoPhrase) in \(.applicationName)"
+                // AppShortcut 문구에는 AppEntity/AppEnum 파라미터만 직접 포함할 수 있습니다.
+                // String 파라미터는 문구에서 제거하고, 실행 후 Siri가 값을 질의하도록 구성합니다.
+                "\(.applicationName)에서 할 일 추가",
+                "\(.applicationName)에서 할 일 추가해줘",
+                "\(.applicationName)로 할 일 추가",
+                "\(.applicationName)로 할 일 추가해줘",
+                "할 일 추가 in \(.applicationName)",
+                // 영어 발화 대응 문구입니다.
+                "Add a todo in \(.applicationName)"
             ],
             shortTitle: "할 일 추가",
             systemImageName: "plus.circle"

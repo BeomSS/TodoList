@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B00000000000000000000004"
-               BuildableName = "StudyTodoApp.app"
-               BlueprintName = "StudyTodoApp"
-               ReferencedContainer = "container:StudyTodoApp.xcodeproj">
+               BuildableName = "TodoDo.app"
+               BlueprintName = "TodoDo"
+               ReferencedContainer = "container:TodoDo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,9 +35,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B00000000000000000000005"
-               BuildableName = "StudyTodoAppTests.xctest"
-               BlueprintName = "StudyTodoAppTests"
-               ReferencedContainer = "container:StudyTodoApp.xcodeproj">
+               BuildableName = "TodoDoTests.xctest"
+               BlueprintName = "TodoDoTests"
+               ReferencedContainer = "container:TodoDo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B00000000000000000000004"
-            BuildableName = "StudyTodoApp.app"
-            BlueprintName = "StudyTodoApp"
-            ReferencedContainer = "container:StudyTodoApp.xcodeproj">
+            BuildableName = "TodoDo.app"
+            BlueprintName = "TodoDo"
+            ReferencedContainer = "container:TodoDo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -74,9 +74,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B00000000000000000000004"
-            BuildableName = "StudyTodoApp.app"
-            BlueprintName = "StudyTodoApp"
-            ReferencedContainer = "container:StudyTodoApp.xcodeproj">
+            BuildableName = "TodoDo.app"
+            BlueprintName = "TodoDo"
+            ReferencedContainer = "container:TodoDo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
