@@ -73,6 +73,8 @@
 		B0000000000000000000011F /* TodayTodoWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B00000000000000000000120 /* TodayTodoWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B0000000000000000000013D /* LocalNotificationPermissionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000013E /* LocalNotificationPermissionChecker.swift */; };
 		B0000000000000000000013F /* TodoNotificationSelectionCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000140 /* TodoNotificationSelectionCenter.swift */; };
+		B00000000000000000000141 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000143 /* PrivacyInfo.xcprivacy */; };
+		B00000000000000000000142 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000144 /* PrivacyInfo.xcprivacy */; };
 		B6518B3FE8E2FD20067841DA /* TodoEventPublishing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50679B476FDEB66D60903936 /* TodoEventPublishing.swift */; };
 		B6DB59AD33F5268B65343528 /* TodoServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26D72B57B2D5AC92821E735 /* TodoServiceType.swift */; };
 		B786ADC5A660D472825DBA2A /* TodoEventLoggerPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AAEF309C8958F313A4CC66 /* TodoEventLoggerPublisher.swift */; };
@@ -196,6 +198,8 @@
 		B00000000000000000000128 /* TodoDo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoDo.entitlements; sourceTree = "<group>"; };
 		B0000000000000000000013E /* LocalNotificationPermissionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationPermissionChecker.swift; sourceTree = "<group>"; };
 		B00000000000000000000140 /* TodoNotificationSelectionCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNotificationSelectionCenter.swift; sourceTree = "<group>"; };
+		B00000000000000000000143 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B00000000000000000000144 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B26D72B57B2D5AC92821E735 /* TodoServiceType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodoServiceType.swift; sourceTree = "<group>"; };
 		BC1EDD08B07D45A132DBADDA /* UndoTodoDeletionUseCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UndoTodoDeletionUseCase.swift; sourceTree = "<group>"; };
 		BC949C57037C80EBB55E3B35 /* TodayTodoEntryItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TodayTodoEntryItem.swift; sourceTree = "<group>"; };
@@ -420,6 +424,7 @@
 				B00000000000000000000124 /* TodayTodoWidget.swift */,
 				B00000000000000000000125 /* TodayTodoWidgetBundle.swift */,
 				B00000000000000000000126 /* Info.plist */,
+				B00000000000000000000144 /* PrivacyInfo.xcprivacy */,
 				B00000000000000000000127 /* TodayTodoWidget.entitlements */,
 				0F2FD4245D94033A6069BE6B /* TodayTodoEntry.swift */,
 				F3FCE25C11ED3952059C00DB /* TodayTodoProvider.swift */,
@@ -457,6 +462,7 @@
 			isa = PBXGroup;
 			children = (
 				B00000000000000000000128 /* TodoDo.entitlements */,
+				B00000000000000000000143 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -566,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B000000000000000000000E1 /* Assets.xcassets in Resources */,
+				B00000000000000000000141 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +587,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B00000000000000000000142 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,8 +794,7 @@
 				INFOPLIST_KEY_CFBundleSpokenName = "투두두";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -797,9 +804,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -817,8 +827,7 @@
 				INFOPLIST_KEY_CFBundleSpokenName = "투두두";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -828,9 +837,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

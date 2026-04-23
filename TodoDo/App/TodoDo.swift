@@ -1,4 +1,6 @@
+#if DEBUG
 import AppIntents
+#endif
 import SwiftUI
 
 /// 앱 실행 진입점입니다.
@@ -11,18 +13,32 @@ struct TodoDo: App {
 
     /// 앱 초기화 시 단축어 파라미터를 최신 상태로 갱신합니다.
     init() {
+#if DEBUG
         TodoAppShortcuts.updateAppShortcutParameters()
+#endif
     }
 
     /// 앱의 화면(Scene) 트리를 정의합니다.
     var body: some Scene {
         WindowGroup {
-            // DI 컨테이너가 만들어 준 ViewModel을 루트 뷰에 주입합니다.
-            TodoListView(viewModel: container.makeTodoListViewModel())
+            rootView
         }
+    }
+
+    /// 런타임 환경에 따라 기본 앱 화면 또는 스토어 캡처용 디버그 화면을 선택합니다.
+    @MainActor
+    private var rootView: AnyView {
+#if DEBUG
+        if let scenario = StoreCaptureScenario.current {
+            return scenario.makeRootView()
+        }
+#endif
+        // DI 컨테이너가 만들어 준 ViewModel을 루트 뷰에 주입합니다.
+        return AnyView(TodoListView(viewModel: container.makeTodoListViewModel()))
     }
 }
 
+#if DEBUG
 /// Siri/단축어에서 TODO를 추가하는 앱 인텐트입니다.
 /// 음성 예시: "시리야, 투두두에서 우유 사기 추가해줘"
 struct AddTodoFromVoiceIntent: AppIntent {
@@ -164,3 +180,4 @@ private struct TodoVoiceTextParser {
         return parts.joined(separator: " ").trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
+#endif

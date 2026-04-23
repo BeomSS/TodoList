@@ -3,6 +3,69 @@ import UIKit
 
 /// 진행 중 TODO를 관리하는 메인 화면입니다.
 public struct TodoListView: View {
+    /// 화면 첫 표시 시점에 적용할 캡처/프리젠테이션 상태입니다.
+    public struct InitialPresentation {
+        /// 팝업 입력 상태 스냅샷입니다.
+        public struct DraftState {
+            /// 표시할 제목입니다.
+            public let title: String
+            /// 마감일 사용 여부입니다.
+            public let hasEndDate: Bool
+            /// 마감 일시입니다.
+            public let endDate: Date
+            /// 선택된 알림 오프셋(초) 목록입니다.
+            public let reminderOffsets: [Int]
+
+            /// 팝업 초깃값을 생성합니다.
+            public init(
+                title: String = "",
+                hasEndDate: Bool = false,
+                endDate: Date = Date(),
+                reminderOffsets: [Int] = []
+            ) {
+                self.title = title
+                self.hasEndDate = hasEndDate
+                self.endDate = endDate
+                self.reminderOffsets = reminderOffsets
+            }
+        }
+
+        /// 수정 팝업 초기 상태입니다.
+        public struct EditState {
+            /// 수정 대상 TODO ID입니다.
+            public let todoID: Int
+            /// 수정 팝업에 채워 넣을 초깃값입니다.
+            public let draft: DraftState
+
+            /// 수정 팝업 상태를 생성합니다.
+            public init(todoID: Int, draft: DraftState) {
+                self.todoID = todoID
+                self.draft = draft
+            }
+        }
+
+        /// 추가 팝업을 바로 열어 둘지 여부입니다.
+        public let addDraft: DraftState?
+        /// 수정 팝업을 바로 열어 둘지 여부입니다.
+        public let editState: EditState?
+        /// 정렬 모드 초기 활성화 여부입니다.
+        public let isReorderMode: Bool
+
+        /// 기본(추가 프리젠테이션 없음) 상태입니다.
+        public static let `default` = InitialPresentation()
+
+        /// 초기 프리젠테이션 상태를 생성합니다.
+        public init(
+            addDraft: DraftState? = nil,
+            editState: EditState? = nil,
+            isReorderMode: Bool = false
+        ) {
+            self.addDraft = addDraft
+            self.editState = editState
+            self.isReorderMode = isReorderMode
+        }
+    }
+
     // MARK: - State
 
     // 화면 생명주기 동안 ViewModel 인스턴스를 유지합니다.
@@ -49,8 +112,28 @@ public struct TodoListView: View {
 
     /// 메인 TODO 화면을 생성합니다.
     /// - Parameter viewModel: 화면 상태와 비즈니스 액션을 제공하는 ViewModel입니다.
-    public init(viewModel: TodoListViewModel) {
+    /// - Parameter initialPresentation: 첫 렌더링 시 적용할 팝업/정렬 상태입니다.
+    public init(
+        viewModel: TodoListViewModel,
+        initialPresentation: InitialPresentation = .default
+    ) {
+        let addDraft = initialPresentation.addDraft
+        let editState = initialPresentation.editState
+
         _viewModel = StateObject(wrappedValue: viewModel)
+        _draftTitle = State(initialValue: addDraft?.title ?? "")
+        _draftHasEndDate = State(initialValue: addDraft?.hasEndDate ?? false)
+        _draftEndDate = State(initialValue: addDraft?.endDate ?? Date())
+        _draftReminderOffsets = State(initialValue: addDraft?.reminderOffsets ?? [])
+        _isAddTodoPopupPresented = State(initialValue: addDraft != nil)
+
+        _editDraftTitle = State(initialValue: editState?.draft.title ?? "")
+        _editHasEndDate = State(initialValue: editState?.draft.hasEndDate ?? false)
+        _editEndDate = State(initialValue: editState?.draft.endDate ?? Date())
+        _editReminderOffsets = State(initialValue: editState?.draft.reminderOffsets ?? [])
+        _isEditTodoPopupPresented = State(initialValue: editState != nil)
+        _editingTodoID = State(initialValue: editState?.todoID)
+        _isReorderMode = State(initialValue: initialPresentation.isReorderMode)
     }
 
     // MARK: - Derived Values
@@ -76,6 +159,15 @@ public struct TodoListView: View {
             guard let endDate = item.endDate else { return false }
             return endDate < Date()
         }.count
+    }
+
+    // Siri 연동 기능은 Debug 빌드에서만 노출합니다.
+    private var isSiriDebugFeatureEnabled: Bool {
+#if DEBUG
+        true
+#else
+        false
+#endif
     }
 
     // MARK: - Body
@@ -119,7 +211,7 @@ public struct TodoListView: View {
                 }
             }
             .overlay {
-                if isSiriGuidePopupPresented {
+                if isSiriDebugFeatureEnabled && isSiriGuidePopupPresented {
                     siriGuidePopup
                         .transition(.opacity.combined(with: .scale(scale: 0.96)))
                 }
@@ -128,7 +220,7 @@ public struct TodoListView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     VStack(spacing: 2) {
-                        Text("투두두")
+                        Text("할 일 보드")
                             .font(.title3.weight(.bold))
                             .todoRoundedFontDesign()
                         Text("오늘 할 일")
@@ -137,7 +229,7 @@ public struct TodoListView: View {
                             .foregroundStyle(.secondary)
                     }
                     .accessibilityElement(children: .combine)
-                    .accessibilityLabel("투두두, 오늘 할 일")
+                    .accessibilityLabel("할 일 보드, 오늘 할 일")
                 }
 
                 ToolbarItem(placement: .topBarLeading) {
@@ -206,7 +298,7 @@ public struct TodoListView: View {
     private var headerCard: some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
-                Text("투두두")
+                Text("할 일 현황")
                     .font(.subheadline.weight(.semibold))
                     .todoRoundedFontDesign()
                     .foregroundStyle(.secondary)
@@ -446,12 +538,14 @@ public struct TodoListView: View {
                     .todoRoundedFontDesign()
                     .foregroundStyle(.secondary)
 
-                Text("시리로도 추가할 수 있어요.\n\"시리야, 투두두에서 우유 사기 추가해줘\"")
-                    .font(.caption.weight(.semibold))
-                    .todoRoundedFontDesign()
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 2)
+                if isSiriDebugFeatureEnabled {
+                    Text("시리로도 추가할 수 있어요.\n\"시리야, 투두두에서 우유 사기 추가해줘\"")
+                        .font(.caption.weight(.semibold))
+                        .todoRoundedFontDesign()
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 2)
+                }
             }
             .frame(maxWidth: .infinity, minHeight: 220)
             .todoCardStyle()
@@ -810,6 +904,7 @@ public struct TodoListView: View {
 
     // 첫 TODO 추가 이후 Siri 가이드를 1초 뒤 1회만 표시합니다.
     private func scheduleSiriGuideIfNeeded() {
+        guard isSiriDebugFeatureEnabled else { return }
         guard hasShownSiriAddGuide == false else { return }
         guard isSiriGuidePopupPresented == false else { return }
 
