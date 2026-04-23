@@ -788,7 +788,7 @@
 				CODE_SIGN_ENTITLEMENTS = TodoDo/Supporting/TodoDo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BUQ8UP3ZV9;
+				DEVELOPMENT_TEAM = TQW95U5HLU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "투두두";
 				INFOPLIST_KEY_CFBundleSpokenName = "투두두";
@@ -799,8 +799,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hmp.sample;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beomss.tododo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -821,7 +821,7 @@
 				CODE_SIGN_ENTITLEMENTS = TodoDo/Supporting/TodoDo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BUQ8UP3ZV9;
+				DEVELOPMENT_TEAM = TQW95U5HLU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "투두두";
 				INFOPLIST_KEY_CFBundleSpokenName = "투두두";
@@ -832,8 +832,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hmp.sample;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beomss.tododo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -893,7 +893,7 @@
 				CODE_SIGN_ENTITLEMENTS = TodayTodoWidget/TodayTodoWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BUQ8UP3ZV9;
+				DEVELOPMENT_TEAM = TQW95U5HLU;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = TodayTodoWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -903,7 +903,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hmp.sample.TodayTodoWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beomss.tododo.TodayTodoWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -920,7 +920,7 @@
 				CODE_SIGN_ENTITLEMENTS = TodayTodoWidget/TodayTodoWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BUQ8UP3ZV9;
+				DEVELOPMENT_TEAM = TQW95U5HLU;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = TodayTodoWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -930,7 +930,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hmp.sample.TodayTodoWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beomss.tododo.TodayTodoWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
