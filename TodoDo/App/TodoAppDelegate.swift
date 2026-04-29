@@ -1,6 +1,9 @@
 import Foundation
 import UIKit
 import UserNotifications
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
 
 /// 로컬 푸시 탭 이벤트를 SwiftUI 계층으로 전달하는 앱 델리게이트입니다.
 final class TodoAppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -15,6 +18,10 @@ final class TodoAppDelegate: NSObject, UIApplicationDelegate, UNUserNotification
     ) -> Bool {
         // 포그라운드/백그라운드 알림 응답을 받기 위해 delegate를 설정합니다.
         UNUserNotificationCenter.current().delegate = self
+#if canImport(GoogleMobileAds)
+        // 광고 SDK를 앱 시작 시 초기화해 첫 배너 요청 지연을 줄입니다.
+        MobileAds.shared.start()
+#endif
         return true
     }
 

@@ -108,7 +108,7 @@ private struct StoreCaptureFixture {
         let tomorrowAt10 = calendar.date(byAdding: .day, value: 1, to: todayAt430) ?? todayAt430
         let completedAt = calendar.date(byAdding: .hour, value: -2, to: now) ?? now
 
-        let items = [
+        let baseItems = [
             TodoItemViewData(
                 id: 101,
                 title: "운동 30분",
@@ -139,6 +139,25 @@ private struct StoreCaptureFixture {
                 completedAt: completedAt
             )
         ]
+
+        let mainScenarioItems = [
+            TodoItemViewData(
+                id: 104,
+                title: "발표 자료 검토",
+                endDate: calendar.date(bySettingHour: 18, minute: 0, second: 0, of: now) ?? now,
+                reminderOffsets: [900],
+                isCompleted: false
+            ),
+            TodoItemViewData(
+                id: 105,
+                title: "장보기 메모 정리",
+                endDate: calendar.date(byAdding: .day, value: 2, to: todayAt430) ?? todayAt430,
+                reminderOffsets: [],
+                isCompleted: false
+            )
+        ]
+
+        let items = scenario == .main ? baseItems + mainScenarioItems : baseItems
 
         let addDraft = TodoListView.InitialPresentation.DraftState(
             title: "팀 점심 예약",

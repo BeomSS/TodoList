@@ -86,6 +86,7 @@
 		C2FDAA164078D6890D9B27E8 /* TodoEventKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B6D2500E83A66C45CE2B4E /* TodoEventKind.swift */; };
 		C8EE23EC074DFD87B4F8CE3C /* TodayTodoWidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9791731264ED03B3A1D4AE80 /* TodayTodoWidgetConfig.swift */; };
 		D6911A01F34BE3FCDF86F80A /* ClearUndoToastUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0023FF6F9015D0B39508D527 /* ClearUndoToastUseCase.swift */; };
+		DAD00000000000000000011 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = DAD00000000000000000013 /* GoogleMobileAds */; };
 		E25AC3EB5A3E6F7EFB4A30F6 /* TodoReminderOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360680D659691168399099FA /* TodoReminderOption.swift */; };
 		E2D2E39EC55E7308480FC177 /* ReadTodoScreenStateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0218B1723E3B63BBCD0AEEA8 /* ReadTodoScreenStateUseCase.swift */; };
 		E39D9CB3AF653D511BDDF0CB /* DefaultReorderTodoListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAEDE2A78D1C5EB52E46B14 /* DefaultReorderTodoListUseCase.swift */; };
@@ -224,6 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD00000000000000000011 /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +487,9 @@
 				B00000000000000000000132 /* PBXTargetDependency */,
 			);
 			name = TodoDo;
+			packageProductDependencies = (
+				DAD00000000000000000013 /* GoogleMobileAds */,
+			);
 			productName = TodoDo;
 			productReference = B00000000000000000000002 /* TodoDo.app */;
 			productType = "com.apple.product-type.application";
@@ -555,6 +560,9 @@
 				Base,
 			);
 			mainGroup = B00000000000000000000071;
+			packageReferences = (
+				DAD00000000000000000012 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
 			productRefGroup = B00000000000000000000074 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -789,9 +797,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQW95U5HLU;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TodoDo/Supporting/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "투두두";
 				INFOPLIST_KEY_CFBundleSpokenName = "투두두";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -822,9 +832,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQW95U5HLU;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TodoDo/Supporting/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "투두두";
 				INFOPLIST_KEY_CFBundleSpokenName = "투두두";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -902,7 +914,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.beomss.tododo.TodayTodoWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -929,7 +941,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.beomss.tododo.TodayTodoWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -980,6 +992,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DAD00000000000000000012 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DAD00000000000000000013 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAD00000000000000000012 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B00000000000000000000001 /* Project object */;
 }

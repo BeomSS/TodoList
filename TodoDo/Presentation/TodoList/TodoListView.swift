@@ -1,5 +1,8 @@
 import SwiftUI
 import UIKit
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
 
 /// 진행 중 TODO를 관리하는 메인 화면입니다.
 public struct TodoListView: View {
@@ -284,6 +287,10 @@ public struct TodoListView: View {
             } message: {
                 Text("설정에서 투두두 알림을 허용하거나, 이번 항목은 알림 없이 저장할 수 있어요.")
             }
+            // 화면 하단 안전 영역에 고정 배너 광고를 배치합니다.
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                adBannerInset
+            }
         }
     }
 
@@ -292,6 +299,16 @@ public struct TodoListView: View {
     // 배경 레이어
     private var backgroundLayer: some View {
         TodoTheme.backgroundGradient.ignoresSafeArea()
+    }
+
+    // 하단 광고 배너 영역
+    @ViewBuilder
+    private var adBannerInset: some View {
+#if canImport(GoogleMobileAds)
+        TodoAdBannerInsetView()
+#else
+        EmptyView()
+#endif
     }
 
     // 상단 요약 카드
@@ -957,6 +974,84 @@ private enum ReminderPermissionAlertMode {
     case add
     case edit
 }
+
+#if canImport(GoogleMobileAds)
+/// AdMob 테스트 ID 구성값입니다.
+/// 배포 전에는 실제 발급받은 앱/배너 ID로 교체해야 합니다.
+private enum TodoAdMobConfig {
+    /// Google이 제공하는 테스트 배너 유닛 ID입니다.
+    static let testBannerAdUnitID = "ca-app-pub-3940256099942544/2435281174"
+}
+
+/// 메인 화면 하단에 고정 배너 광고를 렌더링하는 SwiftUI 래퍼입니다.
+private struct TodoAdBannerInsetView: View {
+    var body: some View {
+        GeometryReader { proxy in
+            // 안전 영역 폭에 맞춰 적응형 배너 크기를 계산합니다.
+            let width = max(320, proxy.size.width - 24)
+            let adSize = largeAnchoredAdaptiveBanner(width: width)
+
+            VStack(spacing: 0) {
+                Divider()
+                    .opacity(0.16)
+
+                TodoAdBannerContainer(adSize: adSize)
+                    .frame(width: adSize.size.width, height: adSize.size.height)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 6)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .background(.ultraThinMaterial)
+        }
+        // 배너 높이(약 50) + 패딩/구분선을 고려한 고정 높이입니다.
+        .frame(height: 62)
+    }
+}
+
+/// UIKit `BannerView`를 SwiftUI에 연결하는 브리지입니다.
+private struct TodoAdBannerContainer: UIViewRepresentable {
+    /// 현재 화면 폭 기준으로 계산된 배너 크기입니다.
+    let adSize: AdSize
+
+    func makeUIView(context: Context) -> BannerView {
+        let bannerView = BannerView(adSize: adSize)
+        bannerView.adUnitID = TodoAdMobConfig.testBannerAdUnitID
+        // 배너 탭 후 전체 화면 전환(브라우저 등)을 위한 루트 VC를 지정합니다.
+        bannerView.rootViewController = context.coordinator.rootViewController
+        bannerView.load(Request())
+        return bannerView
+    }
+
+    func updateUIView(_ uiView: BannerView, context: Context) {
+        // 루트 뷰 컨트롤러가 아직 없었다면 업데이트 시점에 다시 주입합니다.
+        if uiView.rootViewController == nil {
+            uiView.rootViewController = context.coordinator.rootViewController
+        }
+
+        // 회전/폭 변경으로 적응형 배너 크기가 바뀌면 새 요청을 보냅니다.
+        if uiView.adSize.size != adSize.size {
+            uiView.adSize = adSize
+            uiView.load(Request())
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+
+    /// 광고 뷰가 필요로 하는 UIKit 컨텍스트를 보관합니다.
+    final class Coordinator {
+        /// 현재 활성 윈도우의 루트 뷰 컨트롤러를 반환합니다.
+        var rootViewController: UIViewController? {
+            UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap(\.windows)
+                .first(where: \.isKeyWindow)?
+                .rootViewController
+        }
+    }
+}
+#endif
 
 @MainActor
 /// 메인 TODO 화면 프리뷰입니다.
